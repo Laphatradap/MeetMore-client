@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import AvailabilityForm from "./AvailabilityForm"
+import { addAvailability } from "../../actions/availability"
+import AvailabilityList from './AvailabilityList';
 
-export default class AvailabilityContainer extends Component {
+class AvailabilityContainer extends Component {
+  componentDidMount = () => {
+    const isLoggedIn = this.props.user.token;
+    if (!isLoggedIn) {
+      this.props.history.push("/login");
+    }
+  };
+
   state = {
     startDate: "",
     endDate: ""
@@ -29,7 +39,15 @@ export default class AvailabilityContainer extends Component {
           onChange={this.onChange}
           values={this.props}
         />
+        <AvailabilityList />
       </div>
     )
   }
 }
+
+
+const mapStateToProps = state => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps, { addAvailability })(AvailabilityContainer);

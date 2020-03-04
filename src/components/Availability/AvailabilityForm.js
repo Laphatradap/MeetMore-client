@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function EventForm(props) {
-  console.log("props of EventForm", props);
+export default function AvailabilityForm(props) {
+  console.log("props of AvailabilityForm", props);
 
   return (
     <form onSubmit={props.onSubmit}>
