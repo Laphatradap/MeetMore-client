@@ -6,10 +6,11 @@ class Header extends Component {
   render() {
     return (
       <div>
-        <h1 style={{ display: "inline-block"}}>Let's Meet</h1>
-        <nav style={{ display: "inline-block"}}>
+        <h1>Let's Meet</h1>
+        <nav>
         <Link to="/login">Log in</Link>
         <Link to="/signup">Sign up</Link>
+        <Link to="/availability"> Your Availability</Link>
         </nav>
         {/* <h1 style={{ display: "inline-block" }}>Let's Meet!</h1> */}
         {/* <audio controls autoplay loop>
