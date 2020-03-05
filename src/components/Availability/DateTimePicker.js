@@ -1,59 +1,103 @@
-import 'date-fns';
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import "date-fns";
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+  KeyboardDatePicker
+} from "@material-ui/pickers";
 
-export default function MaterialUIPickers() {
-  // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+import { addAvailability } from "../../actions/availability";
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
+function DateTimePicker() {
+  // const isLoggedIn = useSelector(state => state.user.token)
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if(!isLoggedIn) {
+  //     props.history.push("/login")
+  //   }
+  // }, [])
+
+  // componentDidMount = () => {
+  //   const isLoggedIn = props.user.token;
+  //   if (!isLoggedIn) {
+  //     props.history.push("/login");
+  //   }
+  // };
+
+  const [startDate, setStartDate] = useState(new Date("2020-03-01T12:00:00"));
+  const [endDate, setEndDate] = useState(new Date("2020-03-01T12:00:00"));
+
+  const handleStartDateChange = date => {
+    setStartDate(date);
+  };
+
+  const handleEndDateChange = date => {
+    setEndDate(date);
   };
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify="space-around">
-        {/* <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        /> */}
-        <KeyboardDatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Date picker dialog"
-          format="MM/dd/yyyy"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-        <KeyboardTimePicker
-          margin="normal"
-          id="time-picker"
-          label="Time picker"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change time',
-          }}
-        />
-      </Grid>
-    </MuiPickersUtilsProvider>
+    <div>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        {/* <Grid container justify="space-around"> */}
+        <Grid>
+          <KeyboardDatePicker
+            margin="normal"
+            name="startDate"
+            id="date-picker-dialog"
+            label="Start Date"
+            format="MM/dd/yyyy"
+            value={startDate}
+            onChange={handleStartDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+          />
+          <KeyboardTimePicker
+            margin="normal"
+            name="startTime"
+            id="time-picker"
+            label="Start Time"
+            value={startDate}
+            onChange={handleStartDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change time"
+            }}
+          />
+
+          <KeyboardDatePicker
+            margin="normal"
+            name="endDate"
+            id="date-picker-dialog"
+            label="End Date"
+            format="MM/dd/yyyy"
+            value={endDate}
+            onChange={handleEndDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+          />
+          <KeyboardTimePicker
+            margin="normal"
+            name="endTime"
+            id="time-picker"
+            label="End Time"
+            value={endDate}
+            onChange={handleEndDateChange}
+            KeyboardButtonProps={{
+              "aria-label": "change time"
+            }}
+          />
+        </Grid>
+      </MuiPickersUtilsProvider>
+      <button onClick={() => dispatch(addAvailability(startDate, endDate))}>
+        Save your availability
+      </button>
+    </div>
   );
 }
+
+export default DateTimePicker;
