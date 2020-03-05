@@ -22,11 +22,12 @@ export function signUp(username, email, password) {
   };
 }
 
-function loginSuccess(token, email, id) {
+function loginSuccess(token, username, email, id) {
   return {
     type: LOGIN_SUCCESS,
     payload: { 
       token: token,
+      username: username,
       email: email,
       id: id
     }
@@ -40,7 +41,11 @@ export function login(username, email, password, history) {
       email,
       password
     });
-    dispatch(loginSuccess(response.data.token, response.data.email, response.data.id)
+    dispatch(loginSuccess(
+      response.data.token, 
+      response.data.username,
+      response.data.email, 
+      response.data.id)
     );
     history.push("/availability")
   };
