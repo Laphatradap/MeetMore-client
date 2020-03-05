@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-import AvailabilityForm from "./AvailabilityForm"
+// import AvailabilityForm from "./AvailabilityForm"
 import { addAvailability } from "../../actions/availability"
 import AvailabilityList from './AvailabilityList';
+// import DateTimePicker from './picker';
+import MaterialUIPickers from "./DateTimePicker"
 
 class AvailabilityContainer extends Component {
   componentDidMount = () => {
@@ -34,11 +36,13 @@ class AvailabilityContainer extends Component {
     return (
       <div>
         <h1>Which dates are you free to hang out?</h1>
-        <AvailabilityForm 
+        {/* <DateTimePicker /> */}
+        {/* <AvailabilityForm 
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           values={this.props}
-        />
+        /> */}
+        <MaterialUIPickers />
         <AvailabilityList />
       </div>
     )

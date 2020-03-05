@@ -6,7 +6,6 @@ class AvailabilityList extends Component {
   // componentDidMount() {
   //   this.props.fetchAvailability();
   // }
-
   render() {
     if (!this.props.entity) return null;
     return (
