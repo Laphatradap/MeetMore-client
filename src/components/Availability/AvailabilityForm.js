@@ -9,7 +9,7 @@ export default function AvailabilityForm(props) {
         Start Date:
         <input
           name="startDate"
-          type="date"
+          type="datetime-local"
           min={Date.now()}
           value={props.values.startDate}
           onChange={props.onChange}
@@ -20,7 +20,7 @@ export default function AvailabilityForm(props) {
         End Date:
         <input
           name="endDate"
-          type="date"
+          type="datetime-local"
           value={props.values.endDate}
           onChange={props.onChange}
         />
