@@ -1,53 +1,30 @@
-import React, { Component } from 'react'
+import React from "react";
 import { connect } from "react-redux";
-import AvailabilityForm from "./AvailabilityForm"
-import { addAvailability } from "../../actions/availability"
-import AvailabilityList from './AvailabilityList';
+import { addAvailability } from "../../actions/availability";
+import AvailabilityList from "./AvailabilityList";
+import DateTimePicker from "./DateTimePicker";
 
-class AvailabilityContainer extends Component {
-  componentDidMount = () => {
-    const isLoggedIn = this.props.user.token;
-    if (!isLoggedIn) {
-      this.props.history.push("/login");
-    }
-  };
+function AvailabilityContainer () {
+  // componentDidMount = () => {
+  //   const isLoggedIn = props.user.token;
+  //   if (!isLoggedIn) {
+  //     props.history.push("/login");
+  //   }
+  // };
 
-  state = {
-    startDate: "",
-    endDate: ""
-  }
-
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  onSubmit = event => {
-    event.preventDefault();
-    this.props.addAvailability(
-      this.state.startDate,
-      this.state.endDate
-    );
-    // this.props.history.push("/groups")
-  };
-
-  render() {
-    return (
-      <div>
-        <h1>Which dates are you free to hang out?</h1>
-        <AvailabilityForm 
-          onSubmit={this.onSubmit}
-          onChange={this.onChange}
-          values={this.props}
-        />
-        <AvailabilityList />
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h1>Which dates are you free to hang out?</h1>
+      <DateTimePicker />
+      <AvailabilityList />
+    </div>
+  );
 }
-
 
 const mapStateToProps = state => {
   return { user: state.user };
 };
 
-export default connect(mapStateToProps, { addAvailability })(AvailabilityContainer);
+export default connect(mapStateToProps, { addAvailability })(
+  AvailabilityContainer
+);

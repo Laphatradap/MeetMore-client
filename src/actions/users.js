@@ -34,10 +34,9 @@ function loginSuccess(token, username, email, id) {
   };
 }
 
-export function login(username, email, password, history) {
+export function login(email, password) {
   return async function(dispatch, getState) {
     const response = await axios.post("http://localhost:4000/login", {
-      username,
       email,
       password
     });
@@ -47,6 +46,6 @@ export function login(username, email, password, history) {
       response.data.email, 
       response.data.id)
     );
-    history.push("/availability")
+    // history.push("/availability/:id")
   };
 }
