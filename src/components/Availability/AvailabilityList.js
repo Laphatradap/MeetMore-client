@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { fetchAvailability } from "../../actions/availability";
+import { fetchAvailability } from "../../actions/availability";
 
 class AvailabilityList extends Component {
-  // componentDidMount() {
-  //   this.props.fetchAvailability();
-  // }
+  componentDidMount() {
+    // console.log("params", this)
+    this.props.fetchAvailability();
+  }
+
   render() {
     if (!this.props.entity) return null;
     return (
@@ -15,10 +17,10 @@ class AvailabilityList extends Component {
           {this.props.entity.map(e => (
             <ul key={e.id}>
               <li>
-                From {e.startDate.slice(0, 10)} at 
+                From {e.startDate.slice(0, 10)} at
                 {e.startDate.slice(11, 16)}
                 <br></br>
-                To {e.endDate.slice(0, 10)} at 
+                To {e.endDate.slice(0, 10)} at
                 {e.endDate.slice(11, 16)}
               </li>
             </ul>
@@ -36,4 +38,6 @@ const mapStateToProps = state => {
     user: state.user
   };
 };
-export default connect(mapStateToProps)(AvailabilityList);
+export default connect(mapStateToProps, { fetchAvailability })(
+  AvailabilityList
+);

@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 class LoginContainer extends Component {
   state = {
-    username: "",
     email: "",
     password: ""
   };
@@ -16,15 +15,12 @@ class LoginContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.dispatch(
-      login(
-        this.state.username,
-        this.state.email,
-        this.state.password,
-        this.props.history
-      )
+    this.props.login(
+      this.state.email,
+      this.state.password
+      // this.props.history
     );
-    this.setState({ username: "", email: "", password: "" });
+    this.setState({ email: "", password: "" });
     // this.props.history.push("/groups")
   };
 
@@ -36,18 +32,22 @@ class LoginContainer extends Component {
   // }
 
   render() {
+    if (this.props.userLoggedIn) {
+      setTimeout(() => {
+        this.props.history.push("/availability");
+      }, 500);
+      return <p>Login successful</p>;
+    }
     return (
       <div>
-        {this.props.userLoggedIn ? (
-          <h1>You are logged in</h1>
-        ) : (
-          <UserForm
-            text="Login"
-            values={this.state}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-        )}
+        <h1>Login</h1>
+        <UserForm
+          text="Login"
+          login
+          values={this.state}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
       </div>
     );
   }
@@ -59,4 +59,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(LoginContainer);
+export default connect(mapStateToProps, { login })(LoginContainer);

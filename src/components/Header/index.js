@@ -10,7 +10,7 @@ class Header extends Component {
         <nav>
         <Link to="/login">Log in</Link>
         <Link to="/signup">Sign up</Link>
-        <Link to="/availability"> Your Availability</Link>
+        {/* <Link to="/availability">Availability</Link> */}
         </nav>
         {/* <h1 style={{ display: "inline-block" }}>Let's Meet!</h1> */}
         {/* <audio controls autoplay loop>
