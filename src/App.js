@@ -2,7 +2,7 @@ import React from "react";
 // import "./App.css";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import Signup from "./components/Signup";
+import Signup from "./components/Signup/signup_ui";
 import Login from "./components/Login";
 import Header from "./components/Header"
 import Availability from "./components/Availability"
