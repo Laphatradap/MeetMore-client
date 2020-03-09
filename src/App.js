@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Signup from "./components/Signup/signup_ui";
 import Login from "./components/Login";
-import Header from "./components/Header"
-import Availability from "./components/Availability"
+import Header from "./components/Header";
+import AvailabilityListContainer from "./components/Availability";
+import CreateGroupContainer from "./components/CreateGroup";
+import GroupDetails from "./components/Group";
 
 class App extends React.Component {
   protectedRoutes = (Component, routerProps) => {
@@ -17,10 +19,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-        <Header />
+          <Header />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/availability" component={Availability} />
+          <Route exact path="/availability" component={AvailabilityListContainer} />
+          <Route exact path="/groups" component={CreateGroupContainer} />
+          <Route exact path="/groups/:id" component={GroupDetails} />
         </Router>
       </div>
     );

@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchAvailability } from "../../actions/availability";
 
-class AvailabilityList extends Component {
+class AvailabilityListContainer extends Component {
   componentDidMount() {
-    // console.log("params", this)
     this.props.fetchAvailability();
   }
 
@@ -12,6 +11,7 @@ class AvailabilityList extends Component {
     if (!this.props.entity) return null;
     return (
       <div>
+        <br></br>
         <h1>{this.props.user.username}, your availability are:</h1>
         <div>
           {this.props.entity.map(e => (
@@ -39,5 +39,5 @@ const mapStateToProps = state => {
   };
 };
 export default connect(mapStateToProps, { fetchAvailability })(
-  AvailabilityList
+  AvailabilityListContainer
 );
