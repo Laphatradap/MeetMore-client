@@ -5,29 +5,13 @@ export const GROUP_CREATED = "GROUP_CREATED";
 export const GROUPS_FETCHED = "GROUP_FETCHED";
 
 const baseUrl = "http://localhost:4000";
-
-// Fetch all groups
-function groupsFetched(groups) {
-  return {
-    type: GROUPS_FETCHED,
-    payload: groups
-  };
-}
-
-export const fetchGroups = () => (dispatch, getState) => {
-  if (getState().groups) return;
-  request(`${baseUrl}/groups`)
-    .then(res => {
-      dispatch(groupsFetched(res.body));
-    })
-    .catch(console.error);
-};
-
 // Create a group and pass UserId from redux state
 function groupCreated(group) {
   return {
     type: GROUP_CREATED,
-    payload: group
+    payload: {
+      group: group
+    }
   };
 }
 export const createGroup = (name) => {
@@ -47,6 +31,26 @@ export const createGroup = (name) => {
       dispatch(groupCreated(response.data));
     }
   };
+
+// Fetch groups based on userId
+function groupsFetched(groups) {
+  return {
+    type: GROUPS_FETCHED,
+    payload: groups
+  };
+}
+
+export const fetchGroups = () => (dispatch, getState) => {
+  if (getState().groups) return;
+  const userId = getState().user.id;
+  request(`${baseUrl}/groups/user/${userId}`)
+    .then(res => {
+      dispatch(groupsFetched(res.body));
+    })
+    .catch(console.error);
+};
+
+
 
 // Create a group without passing UserId from redux state
 

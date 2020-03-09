@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchGroups} from "../../actions/group";
+import { fetchGroups } from "../../actions/group";
 
 class GroupDetails extends Component {
   componentDidMount() {

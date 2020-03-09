@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function GroupForm(props) {
-  console.log("props of GroupForm", props.values.name);
+  // console.log("props of GroupForm", props.values.name);
   return (
     <form onSubmit={props.onSubmit}>
       <label>
