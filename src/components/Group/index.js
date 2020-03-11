@@ -28,8 +28,4 @@ const mapStateToProps = state => {
   return {group: state.group};
 };
 
-// const mapStateToProps = state => ({
-//   events: state.events //state of eventsReducers
-// })
-
 export default connect(mapStateToProps, { fetchGroups })(GroupDetails);

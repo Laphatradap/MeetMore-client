@@ -34,7 +34,27 @@ export const addAvailability = (startDate, endDate) => {
   };
 };
 
-// Fetch availability based on userId
+// Fetch availabilities based on userId (superagent)
+function availabilityFetched(entity) {
+  return {
+    type: AVAILABILITY_FETCHED,
+    payload: entity
+  };
+}
+
+export const fetchAvailability = () => (dispatch, getState) => {
+  if (getState().entity) return;
+  const loggedUserId = getState().user.id;
+  request(`${baseUrl}/availability/user/${loggedUserId}`)
+    .then(res => {
+      // console.log("res.body of fetchAvailability", res.body);
+      dispatch(availabilityFetched(res.body));
+    })
+    .catch(console.error);
+};
+
+
+// Fetch availability based on userId (axios)
 
 // function availabilityFetched(allEntity) {
 //   return {
@@ -58,21 +78,3 @@ export const addAvailability = (startDate, endDate) => {
 //       dispatch(availabilityFetched(response.data));
 //     };
 //   };
-
-function availabilityFetched(entity) {
-  return {
-    type: AVAILABILITY_FETCHED,
-    payload: entity
-  };
-}
-
-export const fetchAvailability = () => (dispatch, getState) => {
-  if (getState().entity) return;
-  const loggedUserId = getState().user.id;
-  request(`${baseUrl}/availability/user/${loggedUserId}`)
-    .then(res => {
-      // console.log("res.body of fetchAvailability", res.body);
-      dispatch(availabilityFetched(res.body));
-    })
-    .catch(console.error);
-};

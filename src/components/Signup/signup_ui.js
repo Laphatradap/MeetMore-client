@@ -10,7 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+// import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -73,12 +73,12 @@ export default function SignUp() {
 
   const isUserCreated = useSelector(state => state.user.userCreated);
 
-  if(isUserCreated){
+  if (isUserCreated) {
     setTimeout(() => {
-      history.push("/login")
-    }, 500)
-    return <p>Account created!</p>
-  } 
+      history.push("/login");
+    }, 500);
+    return <p>Account created!</p>;
+  }
 
   return (
     <>
@@ -107,17 +107,6 @@ export default function SignUp() {
                   autoFocus
                 />
               </Grid>
-              {/* <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   value={state.email}
@@ -128,7 +117,6 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  // autoComplete="email"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -142,15 +130,8 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
-                  // autoComplete="current-password"
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid> */}
             </Grid>
             <Button
               type="submit"
@@ -173,7 +154,6 @@ export default function SignUp() {
             </Grid>
           </form>
         </div>
-        <Box mt={5}>{/* <Copyright /> */}</Box>
       </Container>
     </>
   );

@@ -28,8 +28,5 @@ const mapStateToProps = state => {
   return { users: state.users };
 };
 
-// const mapStateToProps = state => ({
-//   events: state.events //state of eventsReducers
-// })
 
 export default connect(mapStateToProps, { fetchUsers })(AddMember);
