@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchAvailability } from "../../actions/availability";
+import CreateGroupContainer from "../CreateGroup"
+// import AddMember from "../AddMember";
 
 class AvailabilityListContainer extends Component {
   componentDidMount() {
@@ -26,6 +28,8 @@ class AvailabilityListContainer extends Component {
             </ul>
           ))}
         </div>
+        <CreateGroupContainer />
+        {/* <AddMember /> */}
       </div>
     );
   }

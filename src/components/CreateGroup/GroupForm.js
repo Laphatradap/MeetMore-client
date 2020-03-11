@@ -7,9 +7,9 @@ export default function GroupForm(props) {
       <label>
       Group name:
       <input
-        name="name"
+        name="groupName"
         type="text"
-        value={props.values.name}
+        value={props.values.groupName}
         onChange={props.onChange}
       />
       </label>

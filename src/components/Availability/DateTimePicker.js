@@ -10,7 +10,6 @@ import {
 } from "@material-ui/pickers";
 
 import { addAvailability } from "../../actions/availability";
-import { Link } from "react-router-dom";
 
 function DateTimePicker() {
   // const isLoggedIn = useSelector(state => state.user.token)
@@ -42,8 +41,6 @@ function DateTimePicker() {
 
   return (
     <div>
-              <Link to="/groups"><button>Create a new group</button></Link>
-
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         {/* <Grid container justify="space-around"> */}
         <Grid>

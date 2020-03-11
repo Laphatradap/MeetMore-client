@@ -1,6 +1,6 @@
 import { GROUP_CREATED, GROUPS_FETCHED } from "../actions/group";
 
-export default (state = null, action) => {
+export default (state = [], action) => {
   console.log("action payload of group reducer", action);
 
   switch (action.type) {

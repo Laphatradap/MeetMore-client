@@ -7,7 +7,7 @@ import GroupDetails from "../Group"
 
 class CreateGroupContainer extends Component {
   state = {
-    name: ""
+    groupName: ""
   };
 
   onChange = event => {
@@ -18,9 +18,9 @@ class CreateGroupContainer extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.createGroup(this.state.name);
+    this.props.createGroup(this.state.groupName);
     this.setState({
-      name: ""
+      groupName: ""
     });
     // this.props.history.push("/groups")
   };

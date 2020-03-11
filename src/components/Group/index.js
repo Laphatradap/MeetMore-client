@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { fetchGroups } from "../../actions/group";
 
@@ -13,7 +14,8 @@ class GroupDetails extends Component {
       <div>
         {this.props.group.map(g => (
           <div key={g.id}>
-            <h1>{g.name}</h1>
+            <p>{g.groupName}</p>
+            <Link to={`/groups/${g.id}`}><button>Go to group</button></Link>
           </div>
         ))}
       </div>
