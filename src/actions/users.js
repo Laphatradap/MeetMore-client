@@ -7,7 +7,7 @@ export const USERS_FETCHED = "USERS_FETCHED";
 // export const USER_NOT_CREATED = "USER_NOT_CREATED"
 const baseUrl = "http://localhost:4000";
 
-// Fetch all users
+// Fetch all users except the loggedUserId aka the group creator
 function usersFetched(users) {
   return {
     type: USERS_FETCHED,
@@ -16,7 +16,8 @@ function usersFetched(users) {
 }
 
 export const fetchUsers = () => (dispatch, getState) => {
-  request(`${baseUrl}/users`)
+  const loggedUserId = getState().user.id
+  request(`${baseUrl}/users/${loggedUserId}`)
     .then(res => {
       dispatch(usersFetched(res.body));
     })
