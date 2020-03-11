@@ -43,7 +43,7 @@ export const createGroup = (name) => {
     }
   };
 
-// Fetch groups from GroupUser table based on userId2
+// Fetch groups from GroupUser table based on userId
 function groupsFetched(groups) {
   return {
     type: GROUPS_FETCHED,
