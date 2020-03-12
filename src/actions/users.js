@@ -16,7 +16,7 @@ function usersFetched(users) {
 }
 
 export const fetchUsers = () => (dispatch, getState) => {
-  const loggedUserId = getState().user.id
+  const loggedUserId = getState().user.id;
   request(`${baseUrl}/users/${loggedUserId}`)
     .then(res => {
       dispatch(usersFetched(res.body));

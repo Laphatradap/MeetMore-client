@@ -1,12 +1,16 @@
-// import { GROUPS_FETCHED } from "../actions/group";
+import { GROUP_CREATED, GROUPS_FETCHED } from "../actions/group";
 
-// export default (state = null, action) => {
-//   console.log("action payload of groups reducer", action);
-//   switch (action.type) {
-//     case GROUPS_FETCHED:
-//       return action.payload;
+export default (state = [], action) => {
+  // console.log("action payload of groups reducer", action);
 
-//     default:
-//       return state;
-//   }
-// };
+  switch (action.type) {
+    case GROUP_CREATED:
+      return [...state, action.payload.group];
+
+    case GROUPS_FETCHED:
+      return action.payload;
+
+    default:
+      return state;
+  }
+};

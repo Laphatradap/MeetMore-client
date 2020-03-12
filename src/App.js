@@ -7,7 +7,7 @@ import Login from "./components/Login";
 import Header from "./components/Header";
 import AvailabilityListContainer from "./components/Availability";
 // import CreateGroupContainer from "./components/CreateGroup";
-import AddMember from "./components/AddMember";
+import GroupMemberContainer from "./components/GroupMember";
 // import GroupDetails from "./components/Group";
 
 class App extends React.Component {
@@ -25,7 +25,7 @@ class App extends React.Component {
           <Route exact path="/login" component={Login} />
           <Route exact path="/availability" component={AvailabilityListContainer} />
           {/* <Route exact path="/groups" component={CreateGroupContainer} /> */}
-          <Route exact path="/groups/:id" component={AddMember} />
+          <Route exact path="/groups/:id" component={GroupMemberContainer} />
         </Router>
       </div>
     );

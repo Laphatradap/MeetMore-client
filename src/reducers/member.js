@@ -1,10 +1,9 @@
-import { GROUP_FETCHED } from "../actions/group";
+import { MEMBER_ADDED } from "../actions/members";
 
 export default (state = null, action) => {
-  console.log("action payload of reducers", action);
-
+// console.log("OUTPUT: member state", state)
   switch (action.type) {
-    case GROUP_FETCHED:
+    case MEMBER_ADDED:
       return action.payload;
 
     default:
