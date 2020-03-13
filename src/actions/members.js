@@ -1,35 +1,73 @@
 import axios from "axios";
 
+export const USERS_FETCHED = "USERS_FETCHED";
 export const MEMBER_ADDED = "MEMBER_ADDED";
+export const USER_REMOVED = "USER_REMOVED";
+export const MEMBERS_FETCHED = "MEMBERS_FETCHED"
 const baseUrl = "http://localhost:4000";
+
+// // Fetch all users except the loggedUserId aka the group creator
+function usersFetched(users) {
+  return {
+    type: USERS_FETCHED,
+    users
+  };
+}
+
+export const fetchUsers = () => async (dispatch, getState) => {
+  // if(getState().member.members) return;
+  const loggedUserId = getState().user.id;
+  await axios
+    .get(`${baseUrl}/users/${loggedUserId}`)
+    .then(res => {
+      dispatch(usersFetched(res.data));
+    })
+    .catch(console.error);
+};
 
 //when add member is clicked, userId and groupId is added in groupUser table
 function memberAdded(member) {
   return {
     type: MEMBER_ADDED,
-    payload: member
+    member
   };
 }
 
-export const addMember = (groupId, userId) => {
+function userRemoved (userId) {
+  return {
+    type: USER_REMOVED,
+    userId
+  };
+}
+
+function membersFetched (members) {
+  return {
+    type: MEMBERS_FETCHED,
+    members
+  }
+}
+
+export const addMember = userId => {
   return async function(dispatch, getState) {
-    // get userId of user that is clicked
-    // get groupId from the params???
-    // const groupId = await axios
-    //   .get(`${baseUrl}/groups/${groupId}`)
-    //   .then(response => {
-    //   console.log("OUTPUT: addMember -> response.data", response.data)
-    //   })
-   
+    const groupId = getState().group.map(g => g.id);
+
     const response = await axios({
       method: "POST",
       url: `${baseUrl}/groupUser/member`,
       data: {
-        userId
+        userId,
+        groupId
       }
     });
+
+    await axios
+      .get(`${baseUrl}/groupUser/${groupId}`)
+      .then(res => {
+        dispatch(membersFetched(res.data))
+      })
+
     dispatch(memberAdded(response.data));
+    dispatch(userRemoved(response.data.userId))
   };
 };
 
-// display the users based on groupUser table, instead of user table

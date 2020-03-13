@@ -1,4 +1,3 @@
-import request from "superagent";
 import axios from "axios";
 
 export const GROUP_CREATED = "GROUP_CREATED";
@@ -18,7 +17,6 @@ function groupCreated(group) {
 }
 export const createGroup = name => {
   return async function(dispatch, getState) {
-    // console.log("group name", name)
     const response = await axios({
       method: "POST",
       url: `${baseUrl}/groups`,
@@ -26,7 +24,6 @@ export const createGroup = name => {
         groupName: name
       }
     });
-    // console.log("success in create group", response.data);
     dispatch(groupCreated(response.data));
 
     // when group is created, add groupId and UserId to GroupUser table
@@ -52,13 +49,12 @@ function groupsFetched(groups) {
   };
 }
 
-export const fetchGroups = () => (dispatch, getState) => {
-  // if (getState().groups) return;
-  // console.log("OUTPUT: fetchGroups -> getState()", getState())
+export const fetchGroups = () => async (dispatch, getState) => {
   const userId = getState().user.id;
-  request(`${baseUrl}/groups/user/${userId}`)
+  await axios
+    .get(`${baseUrl}/groups/user/${userId}`)
     .then(res => {
-      dispatch(groupsFetched(res.body));
+      dispatch(groupsFetched(res.data));
     })
     .catch(console.error);
 };
@@ -71,25 +67,17 @@ function groupFetched(group) {
   };
 }
 
-export const fetchGroup = id => async (dispatch, getState) => {
-  console.log("OUTPUT: id of fetchGroup", id);
-  // if (getState().groups) return;
-  request(`${baseUrl}/groups/${id}`).then(res => {
-    console.log("OUTPUT: res of fetchGroup", res.body);
-    dispatch(groupFetched(res.body));
-  })
-  .catch(console.error)
-  // await axios
-  //   .get(`${baseUrl}/groups/${id}`)
-  //   .then(res => {
-  //     console.log("res body of fetch Group", res.body);
-  //     dispatch(groupFetched(res.body));
-  //   })
-  //   .catch(console.error);
+export const fetchGroup = id => async dispatch => {
+  // console.log("OUTPUT: id of fetchGroup", id);
+  await axios
+    .get(`${baseUrl}/groups/${id}`)
+    .then(res => {
+      dispatch(groupFetched(res.data));
+    })
+    .catch(console.error);
 };
 
 // Create a group without passing UserId from redux state
-
 // export const createGroup = (data) => (dispatch) => {
 //   console.log("created group data", data)
 //   request

@@ -104,6 +104,7 @@ export default function SignUp() {
                   fullWidth
                   id="firstName"
                   label="Username"
+                  type="text"
                   autoFocus
                 />
               </Grid>
@@ -117,6 +118,7 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
+                  type="email"
                 />
               </Grid>
               <Grid item xs={12}>

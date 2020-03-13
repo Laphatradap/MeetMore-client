@@ -1,28 +1,40 @@
 import axios from "axios";
-import request from "superagent";
+// import request from "superagent";
 
 export const USER_CREATED = "USER_CREATED";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const USERS_FETCHED = "USERS_FETCHED";
+// export const USERS_FETCHED = "USERS_FETCHED";
 // export const USER_NOT_CREATED = "USER_NOT_CREATED"
 const baseUrl = "http://localhost:4000";
 
 // Fetch all users except the loggedUserId aka the group creator
-function usersFetched(users) {
-  return {
-    type: USERS_FETCHED,
-    payload: users
-  };
-}
+// function usersFetched(users) {
+//   return {
+//     type: USERS_FETCHED,
+//     payload: users
+//   };
+// }
 
-export const fetchUsers = () => (dispatch, getState) => {
-  const loggedUserId = getState().user.id;
-  request(`${baseUrl}/users/${loggedUserId}`)
-    .then(res => {
-      dispatch(usersFetched(res.body));
-    })
-    .catch(console.error);
-};
+// export const fetchUsers = () => async (dispatch, getState) => {
+//   // get all users except the loggedUserId
+//   const loggedUserId = getState().user.id;
+//   await axios
+//     .get(`${baseUrl}/users/${loggedUserId}`)
+//     .then(res => {
+//       dispatch(usersFetched(res.data));
+//     })
+//     .catch(console.error);
+// };
+
+// export const fetchUsers = () => (dispatch, getState) => {
+//   const loggedUserId = getState().user.id;
+//   request(`${baseUrl}/users/${loggedUserId}`)
+//     .then(res => {
+//       dispatch(usersFetched(res.body));
+//       console.log("OUTPUT: fetchUsers -> res.body", res.body)
+//     })
+//     .catch(console.error);
+// };
 
 // Sign up
 function signUpSuccess() {
