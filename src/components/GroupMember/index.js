@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { connect } from "react-redux";
 import { fetchGroup } from "../../actions/group";
-import { fetchUsers, addMember } from "../../actions/members";
-// import Member from "./Member";
+import { fetchUsers } from "../../actions/members";
+import Member from "./Member";
 
 export default function GroupMemberContainer(props) {
   // Fetch users and group info from redux state
   const users = useSelector(state => state.member.users);
   const group = useSelector(state => state.group);
+  const members = useSelector(state => state.member.members);
+  console.log("OUTPUT: GroupMemberContainer -> members", members)
 
   // Call actions to get users list and the group info
   const dispatch = useDispatch();
@@ -17,25 +18,20 @@ export default function GroupMemberContainer(props) {
     dispatch(fetchGroup(Number(props.match.params.id)));
   }, []);
 
+  // render member template to user for both friends list & member list
+  const RenderMembers = (members, Component) => {
+    return members.map(el => (
+      <Component key={el.id} users members username={el.username} id={el.id} />
+    ));
+  };
 
   if (!users) return "Loading..";
   if (!group) return null;
   return (
     <div>
       <h1>{group.map(g => g.groupName)}</h1>
-      <div>
-        <h2>Your Friend List</h2>
-        {users.map(user => (
-          <ul key={user.id}>
-            <li>{user.username}</li>
-            <p>{user.id}</p>
-            <button onClick={() => dispatch(addMember(user.id))}>
-              Add to group
-            </button>
-          </ul>
-        ))}
-        {/* <Member /> */}
-      </div>
+      <div>{RenderMembers(users, Member)}</div>
+      <div>{RenderMembers(members, Member)}</div>
     </div>
   );
 }
