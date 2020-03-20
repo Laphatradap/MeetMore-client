@@ -1,7 +1,7 @@
 import React from "react";
 
 const UserForm = props => {
-  // console.log(props);
+  console.log(props.login);
   return (
     <div>
       {props.text}

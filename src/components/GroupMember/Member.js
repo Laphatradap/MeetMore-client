@@ -11,7 +11,7 @@ export default function Member(props) {
     <div>
       <ul key={props.id}>
         <h3>{props.username}</h3>
-        {props.users && (
+        {!props.members && (
           <button onClick={() => dispatch(addMember(props.id))}>
             Add to group
           </button>

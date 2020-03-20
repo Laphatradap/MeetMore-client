@@ -1,62 +1,49 @@
-import React, { Component } from "react";
-import UserForm from "../UserForm";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { login } from "../../actions/users";
-import { connect } from "react-redux";
+import SignUpLoginForm from "../SignUpLogInForm"
 
-class LoginContainer extends Component {
-  state = {
+export default function Login () {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [state, setState] = useState({
     email: "",
     password: ""
+  });
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setState(previousValue => ({
+      ...previousValue,
+      [name]: value
+    }));
   };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    this.props.login(
-      this.state.email,
-      this.state.password
-      // this.props.history
-    );
-    this.setState({ email: "", password: "" });
-    // this.props.history.push("/groups")
+    dispatch(login(state.email, state.password));
+    setState({ email: "", password: "" });
   };
 
-  // componentDidUpdate(prevProps) {
-  //   console.log("prevProps", prevProps)
-  //   if (prevProps.userLoggedIn !== this.props.userLoggedIn) {
-  //     setTimeout(() => this.props.history.push("/"), 1500);
-  //   }
-  // }
+  const userLoggedIn = useSelector(state => state.user.token !== null);
 
-  render() {
-    if (this.props.userLoggedIn) {
-      setTimeout(() => {
-        this.props.history.push("/availability");
-      }, 500);
-      return <p>Login successful</p>;
-    }
-    return (
-      <div>
-        <h1>Login</h1>
-        <UserForm
-          text="Login"
-          login
-          values={this.state}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-      </div>
-    );
+  if (userLoggedIn) {
+    setTimeout(() => {
+      history.push("/availability");
+    }, 500);
+    return <p>Login Successful!</p>;
   }
+
+  return (
+    <>
+    <SignUpLoginForm 
+      text={"Login"}
+      login
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+      values={state}
+    />
+    </>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    userLoggedIn: state.user.token !== null
-  };
-};
-
-export default connect(mapStateToProps, { login })(LoginContainer);
