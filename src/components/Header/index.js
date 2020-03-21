@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    color: 'white'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -30,26 +31,26 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
-          </IconButton> */}
+          </IconButton>
           <Typography variant="h6" className={classes.title}>
             Meet More
           </Typography>
           {!userLoggedIn && (
             <>
           <Link to="/signup"> 
-          <Button color="textPrimary">Sign up</Button>
+          <Button className={classes.root}>Sign up</Button>
           </Link>
           <Link to="/login"> 
-          <Button color="textPrimary">Login</Button>
+          <Button className={classes.root}>Login</Button>
           </Link>
           </>
           )}
           {userLoggedIn && (
             <>
           <Link to="/"> 
-          <Button color="textPrimary">Log out</Button>
+          <Button className={classes.root}>Log out</Button>
           </Link>
           </>
           )}
