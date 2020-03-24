@@ -1,30 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
-import { addAvailability } from "../../actions/availability";
-import AvailabilityList from "./AvailabilityList";
-import DateTimePicker from "./DateTimePicker";
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-function AvailabilityContainer () {
-  // componentDidMount = () => {
-  //   const isLoggedIn = props.user.token;
-  //   if (!isLoggedIn) {
-  //     props.history.push("/login");
-  //   }
-  // };
-
+export default function SimpleContainer() {
   return (
-    <div>
-      <h1>Which dates are you free to hang out?</h1>
-      <DateTimePicker />
-      <AvailabilityList />
-    </div>
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
+      </Container>
+    </React.Fragment>
   );
 }
 
-const mapStateToProps = state => {
-  return { user: state.user };
-};
-
-export default connect(mapStateToProps, { addAvailability })(
-  AvailabilityContainer
-);

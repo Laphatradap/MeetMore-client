@@ -1,46 +1,85 @@
-import React, { Component } from "react";
-// import { connect } from "react-redux";
+import React from 'react';
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-class Header extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Let's Meet</h1>
-        <nav>
-        <Link to="/login">Log in</Link>
-        <Link to="/signup">Sign up</Link>
-        {/* <Link to="/availability">Availability</Link> */}
-        </nav>
-        {/* <h1 style={{ display: "inline-block" }}>Let's Meet!</h1> */}
-        {/* <audio controls autoplay loop>
-          <source src="/music/6.mp3" type="audio/mpeg" />
-        </audio> */}
-        {/* {this.props.token ? (
-          <nav style={{ display: "inline-block" }}>
-            <Link to="/">Lobby</Link>
-            <Link to="/logout">Log out</Link>
-          </nav>
-        ) : (
-          <nav style={{ display: "inline-block" }}>
-            <Link to="/login">Log in</Link>
-            <Link to="/signup">Sign up</Link>
-          </nav>
-        )} */}
-        {/* <nav style={{ display: "inline-block" }}>
-          <Link to="/login">Log in</Link>
-          <Link to="/signup">Sign up</Link>
-        </nav> */}
-      </div>
-    );
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    top: 0,
+    bottom: "auto",
+    width: "100%",
+    height: "56px"
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
   }
+}));
+
+export default function ButtonAppBar() {
+  const classes = useStyles();
+  const userLoggedIn = useSelector(state => state.user.token !== null);
+  
+  return (
+    <div>
+      <AppBar position="fixed" color="primary" className={classes.appBar}>
+        <Toolbar className={classes.root}>
+          <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Meet More
+          </Typography>
+          {!userLoggedIn && (
+            <>
+          <Link to="/signup"> 
+          <Button className={classes.root}>Sign up</Button>
+          </Link>
+          <Link to="/login"> 
+          <Button className={classes.root}>Login</Button>
+          </Link>
+          </>
+          )}
+          {userLoggedIn && (
+            <>
+          <Link to="/"> 
+          <Button className={classes.root}>Log out</Button>
+          </Link>
+          </>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
-// const mapStateToProps = state => ({
-//   token: state.session.jwt
-// });
+// import React, { Component } from "react";
+// import { Link } from "react-router-dom";
 
-// const mapDispatchToProps = {};
+// class Header extends Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>Let's Meet</h1>
+//         <nav>
+//           <Link to="/login">Log in</Link>
+//           <Link to="/signup">Sign up</Link>
+//         </nav>
+//       </div>
+//     );
+//   }
+// }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Header);
-export default Header;
+// export default Header;

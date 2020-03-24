@@ -1,50 +1,49 @@
-import React, { Component } from "react";
-import UserForm from "../UserForm";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { signUp } from "../../actions/users";
-import { Link } from "react-router-dom"
+import SignUpLoginForm from "../SignUpLogInForm"
 
-class SignupFormContainer extends Component {
-  state = {
+export default function SignUp () {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [state, setState] = useState({
     username: "",
     email: "",
     password: ""
+  });
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setState(previousValue => ({
+      ...previousValue,
+      [name]: value
+    }));
   };
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    // console.log(this.state);
-    this.props.dispatch(signUp(this.state.username, this.state.email, this.state.password));
-    this.setState({ username: "", email: "", password: "" });
-    this.props.history.push("/login")
-
+    dispatch(signUp(state.username, state.email, state.password));
+    setState({ username: "", email: "", password: "" });
   };
 
-  render() {
-    return (
-      <div>
-        {this.props.userCreated ? <h1>Account created</h1> : null}
-        <UserForm
-          text={"Signup"}
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-          values={this.state}
-        />
-        <Link to="/"><p>Back to Home</p></Link>
-      </div>
-    );
+  const isUserCreated = useSelector(state => state.user.userCreated);
+
+  if (isUserCreated) {
+    setTimeout(() => {
+      history.push("/login");
+    }, 500);
+    return <p>Account created!</p>;
   }
+
+  return (
+    <>
+    <SignUpLoginForm 
+      text={"Signup"}
+      handleSubmit={handleSubmit}
+      handleChange={handleChange}
+      values={state}
+    />
+    </>
+  );
 }
-
-const mapStateToProps = state => {
-  // console.log("STATE IN MSTP", state);
-  return {
-    userCreated: state.user.userCreated
-  };
-};
-
-export default connect(mapStateToProps)(SignupFormContainer);
