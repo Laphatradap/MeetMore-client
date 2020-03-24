@@ -93,6 +93,7 @@ function DateTimePicker() {
           />
         </Grid>
       </MuiPickersUtilsProvider>
+      <br></br>
       <button onClick={() => dispatch(addAvailability(startDate, endDate))}>
         Save your availability
       </button>

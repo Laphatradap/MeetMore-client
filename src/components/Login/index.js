@@ -30,7 +30,7 @@ export default function Login () {
 
   if (userLoggedIn) {
     setTimeout(() => {
-      history.push("/availability");
+      history.push("/create");
     }, 500);
     return <p>Login Successful!</p>;
   }

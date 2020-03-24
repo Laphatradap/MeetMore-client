@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createGroup } from "../../actions/group";
 import GroupForm from "./GroupForm";
-import GroupDetails from "../Group";
+import GroupDetails from "../Groups";
 // import {Link} from 'react-router-dom'
 
 import CssBaseline from "@material-ui/core/CssBaseline";
