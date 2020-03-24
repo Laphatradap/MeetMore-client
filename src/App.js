@@ -9,7 +9,7 @@ import AvailabilityListContainer from "./components/Availability";
 // import CreateGroupContainer from "./components/CreateGroup";
 import GroupMemberContainer from "./components/GroupMember";
 // import GroupDetails from "./components/Group";
-
+import Home from "./components/Home"
 class App extends React.Component {
   protectedRoutes = (Component, routerProps) => {
     const { token } = this.props;
@@ -21,6 +21,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <Header />
+          <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/availability" component={AvailabilityListContainer} />

@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createGroup } from "../../actions/group";
 import GroupForm from "./GroupForm";
-import GroupDetails from "../Group"
+import GroupDetails from "../Group";
 // import {Link} from 'react-router-dom'
 
-class CreateGroupContainer extends Component {
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+class
+ CreateGroupContainer extends Component {
   state = {
     groupName: ""
   };
@@ -27,15 +31,20 @@ class CreateGroupContainer extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Create a new group</h1>
-        <GroupForm
-          onSubmit={this.onSubmit}
-          onChange={this.onChange}
-          values={this.state}
-        />
-        <GroupDetails />
-      </div>
+      <React.Fragment>
+        <CssBaseline />
+        <Container>
+          <Typography>
+            <h1>Create a new group</h1>
+            <GroupForm
+              onSubmit={this.onSubmit}
+              onChange={this.onChange}
+              values={this.state}
+            />
+          </Typography>
+          <GroupDetails />
+        </Container>
+      </React.Fragment>
     );
   }
 }
