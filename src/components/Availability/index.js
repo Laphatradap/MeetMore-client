@@ -17,7 +17,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     textAlign: "center",
     margin: "0 auto"
-    // color: theme.palette.text.secondary
   },
   title: {
     marginTop: theme.spacing(1),
@@ -36,7 +35,7 @@ function Availability() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Grid container justify="center" direction="column" spacing={3}> 
+      <Grid container justify="center" direction="column" spacing={3}>
         <Grid item xs={8} sm container>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5" className={classes.title}>
@@ -51,19 +50,6 @@ function Availability() {
       </Grid>
     </div>
   );
-
-  // return (
-  //   <React.Fragment>
-  //     <CssBaseline />
-  //     <Container fixed disableGutters color="primary">
-  //       <Typography>
-  //         <h1>Which dates are you free to hang out?</h1>
-  //         <DateTimePicker />
-  //         <AvailabilityList />
-  //       </Typography>
-  //     </Container>
-  //   </React.Fragment>
-  // );
 }
 
 const mapStateToProps = state => {
