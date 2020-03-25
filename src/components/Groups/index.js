@@ -3,14 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-// import Typography from "@material-ui/core/Typography";
-// import CardContent from "@material-ui/core/CardContent";
+import GroupAddRoundedIcon from "@material-ui/icons/GroupAddRounded";
+import Typography from '@material-ui/core/Typography';
+
 import { fetchGroups } from "../../actions/group";
-import GroupMember from "../GroupMember";
+// import GroupMember from "../GroupMember";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    "& > span": {
+      margin: theme.spacing(2)
+    }
   },
   paper: {
     padding: theme.spacing(2),
@@ -39,12 +43,16 @@ export default function GroupsContainer() {
         </Grid>
         {groups.map(group => (
           <Grid item xs={3}>
-            <Paper component="h3" variant="h6" className={classes.paper}>{group.groupName}</Paper>
+            <Paper component="h3" variant="h6" className={classes.paper}>
+              {group.groupName}
+              <Typography align="center">
+                <GroupAddRoundedIcon />
+              </Typography>
+            </Paper>
           </Grid>
         ))}
-        
-        
-        <GroupMember groupId={groups.map(group => group.id)} />
+
+        {/* <GroupMember groupId={groups.map(group => group.id)} /> */}
       </Grid>
     </div>
   );
