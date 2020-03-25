@@ -5,6 +5,7 @@ import { fetchUsers } from "../../actions/members";
 import Member from "./Member";
 
 export default function GroupMemberContainer(props) {
+  console.log("OUTPUT: GroupMemberContainer -> props", props)
   // Fetch users and group info from redux state
   const users = useSelector(state => state.member.users);
   const group = useSelector(state => state.group);
@@ -15,7 +16,7 @@ export default function GroupMemberContainer(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUsers());
-    dispatch(fetchGroup(Number(props.match.params.id)));
+    dispatch(fetchGroup(Number(props.groupId)));
   }, []);
 
   // render member template to user for both friends list & member list
@@ -29,7 +30,7 @@ export default function GroupMemberContainer(props) {
   if (!group) return null;
   return (
     <div>
-      <h1>{group.map(g => g.groupName)}</h1>
+      {/* <h1>{group.map(g => g.groupName)}</h1> */}
       <div>{RenderMembers(users, Member)}</div>
       <div>{RenderMembers(members, Member)}</div>
     </div>
