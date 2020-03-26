@@ -51,6 +51,7 @@ function membersFetched (members) {
 export const addMember = userId => {
   return async function(dispatch, getState) {
     const groupId = getState().group.map(g => g.id);
+    console.log("OUTPUT: groupId", groupId)
 
     const response = await axios({
       method: "POST",

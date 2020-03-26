@@ -11,6 +11,7 @@ export default function Login () {
     email: "",
     password: ""
   });
+  // console.log("OUTPUT: Login -> state", state)
 
   const handleChange = event => {
     const { name, value } = event.target;

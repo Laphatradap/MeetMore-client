@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import GroupAddRoundedIcon from "@material-ui/icons/GroupAddRounded";
-import Typography from '@material-ui/core/Typography';
-
+// import GroupAddRoundedIcon from "@material-ui/icons/GroupAddRounded";
+import Typography from "@material-ui/core/Typography";
+import SimpleDialogDemo from "../Dialog"
 import { fetchGroups } from "../../actions/group";
 // import GroupMember from "../GroupMember";
 
@@ -37,23 +37,27 @@ export default function GroupsContainer() {
 
   return (
     <div clasName={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} component="h2" variant="h6">
-          your groups are:
-        </Grid>
-        {groups.map(group => (
-          <Grid item xs={3}>
-            <Paper component="h3" variant="h6" className={classes.paper}>
-              {group.groupName}
-              <Typography align="center">
-                <GroupAddRoundedIcon />
-              </Typography>
-            </Paper>
+      {groups.length !== 0 && (
+        <>
+          <Grid container spacing={3}>
+            <Grid item xs={12} component="h2" variant="h6">
+              your groups are:
+            </Grid>
+            {groups.map(group => (
+              <Grid item xs={3}>
+                <Paper component="h3" variant="h6" className={classes.paper}>
+                  {group.groupName}
+                  <Typography align="center">
+                    <SimpleDialogDemo groupId={group.id} />
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
-        ))}
+        </>
+      )}
 
-        {/* <GroupMember groupId={groups.map(group => group.id)} /> */}
-      </Grid>
+      {/* <GroupMember groupId={groups.map(group => group.id)} /> */}
     </div>
   );
 }
