@@ -11,7 +11,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
-// import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 import { blue } from "@material-ui/core/colors";
 import GroupAddRoundedIcon from "@material-ui/icons/GroupAddRounded";
@@ -91,7 +90,9 @@ SimpleDialog.propTypes = {
 function RenderMembers(props) {
   console.log("OUTPUT: RenderMembers -> props", props);
   const members = useSelector(state => state.groups);
+  const userloggedin = useSelector (state => state.user.id)
   if (!members) return null;
+  if(!userloggedin) return null
 
   // const eachGroupId = members.map(member => member.id)
   // const usernames = members.users.map(user => user.username)

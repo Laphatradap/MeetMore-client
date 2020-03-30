@@ -16,7 +16,6 @@ function usersFetched(users) {
 }
 
 export const fetchUsers = () => async (dispatch, getState) => {
-  // if(getState().member.members) return;
   const loggedUserId = getState().user.id;
   await axios
     .get(`${baseUrl}/users/${loggedUserId}`)
@@ -62,8 +61,6 @@ function membersFetched(members) {
 export const addMember = userId => {
   return async function(dispatch, getState) {
     const groupId = getState().group.map(g => g.id);
-    console.log("OUTPUT: groupId", groupId);
-
     //add userId and groupId into GroupUser table based on groupId chosen
     const response = await axios({
       method: "POST",
@@ -80,7 +77,6 @@ export const addMember = userId => {
         dispatch(membersFetched(res.data));
       })
       .catch(console.error);
-
     dispatch(memberAdded(response.data));
     dispatch(userRemoved(response.data.userId));
   };
