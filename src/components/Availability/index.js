@@ -43,7 +43,7 @@ function Availability() {
             </Typography>
             <br></br>
             <DateTimePicker />
-            <br></br>
+            <br></br>[]
             <AvailabilityList />
           </Paper>
         </Grid>

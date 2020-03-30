@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 import { createGroup } from "../../actions/group";
 import GroupForm from "./GroupForm";
-import GroupDetails from "../Groups";
+import GroupsContainer from "../Groups";
 // import GroupMembers from '../GroupMember'
 // import {Link} from 'react-router-dom'
 
@@ -64,7 +64,7 @@ export default function CreateGroupContainer() {
         </Grid>
         <Grid item xs={12} container>
           <Paper className={classes.paper}>
-            <GroupDetails />
+            <GroupsContainer />
           </Paper>
         </Grid>
       </Grid>

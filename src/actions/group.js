@@ -3,6 +3,7 @@ import axios from "axios";
 export const GROUP_CREATED = "GROUP_CREATED";
 export const GROUPS_FETCHED = "GROUPS_FETCHED";
 export const GROUP_FETCHED = "GROUP_FETCHED";
+// export const MEMBERS_FETCHED = "MEMBERS_FETCHED";
 
 const baseUrl = "http://localhost:4000";
 
@@ -29,7 +30,7 @@ export const createGroup = name => {
     // when group is created, add groupId and UserId to GroupUser table
     const groupId = response.data.id;
     const userId = getState().user.id;
-    const response2 = await axios({
+    await axios({
       method: "POST",
       url: `${baseUrl}/groupUser`,
       data: {
@@ -37,7 +38,6 @@ export const createGroup = name => {
         userId: userId
       }
     });
-    console.log("res data2", response2.data);
   };
 };
 
@@ -67,13 +67,32 @@ function groupFetched(group) {
   };
 }
 
+// function membersFetched(members) {
+//   return {
+//     type: MEMBERS_FETCHED,
+//     members
+//   };
+// }
+
+// when fetch one group
+// 1) get groupInfo and all members
 export const fetchGroup = id => async dispatch => {
   // console.log("OUTPUT: id of fetchGroup", id);
+  // when a group is clicked,
+  // 1) fetch that group from group table
   await axios
     .get(`${baseUrl}/groups/${id}`)
     .then(res => {
+      // console.log("OUTPUT: res.data", res.data)
       dispatch(groupFetched(res.data));
     })
+
+    // // 2) fetch member(s) from that group from groupUser table
+    // await axios
+    // .get(`${baseUrl}/groupUser/${groupId}`)
+    // .then(res => {
+    //   dispatch(membersFetched(res.data));
+    // })
     .catch(console.error);
 };
 

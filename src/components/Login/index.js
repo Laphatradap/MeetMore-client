@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { login } from "../../actions/users";
-import SignUpLoginForm from "../SignUpLogInForm"
+import SignUpLoginForm from "../SignUpLogInForm";
 
-export default function Login () {
+export default function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [state, setState] = useState({
@@ -31,6 +31,7 @@ export default function Login () {
 
   if (userLoggedIn) {
     setTimeout(() => {
+      // history.push("/availability");
       history.push("/create");
     }, 500);
     return <p>Login Successful!</p>;
@@ -38,13 +39,13 @@ export default function Login () {
 
   return (
     <>
-    <SignUpLoginForm 
-      text={"Login"}
-      login
-      handleSubmit={handleSubmit}
-      handleChange={handleChange}
-      values={state}
-    />
+      <SignUpLoginForm
+        text={"Login"}
+        login
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        values={state}
+      />
     </>
   );
 }

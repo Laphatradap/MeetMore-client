@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,15 +11,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
-import AddIcon from "@material-ui/icons/Add";
+// import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 import { blue } from "@material-ui/core/colors";
 import GroupAddRoundedIcon from "@material-ui/icons/GroupAddRounded";
-import { fetchUsers } from "../../actions/members";
-import { addMember } from "../../actions/members";
-import { fetchGroup } from "../../actions/group";
+import { fetchUsers, addMember } from "../../actions/members";
+import { fetchGroup, fetchGroups } from "../../actions/group";
 
-// const emails = ['username@gmail.com', 'user02@gmail.com'];
 const useStyles = makeStyles({
   avatar: {
     backgroundColor: blue[100],
@@ -27,26 +25,21 @@ const useStyles = makeStyles({
   }
 });
 
+//dialog popup
 function SimpleDialog(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchGroup(Number(props.groupId)))
-  // }, [])
-  const { onClose, selectedValue, open, users } = props;
-  const member = props.selectedValue.username;
-  console.log("OUTPUT: SimpleDialog -> member", member);
-  console.log("OUTPUT: SimpleDialog -> users", users);
-  console.log("OUTPUT: SimpleDialog -> selectedValue", selectedValue);
+
+  const { onClose, open, users, members } = props;
+  console.log("OUTPUT: SimpleDialog -> members", members);
 
   const handleClose = () => {
-    onClose(member);
+    onClose(members);
   };
 
-  const handleListItemClick = value => {
-    onClose(value);
-    dispatch(addMember(value));
-    console.log("OUTPUT: SimpleDialog -> value", value);
+  const handleListItemClick = (userId, username) => {
+    dispatch(addMember(userId));
+    onClose(username);
   };
 
   return (
@@ -60,7 +53,7 @@ function SimpleDialog(props) {
         {users.map(user => (
           <ListItem
             button
-            onClick={() => handleListItemClick(user.username)}
+            onClick={() => handleListItemClick(user.id, user.username)}
             key={user.id}
           >
             <ListItemAvatar>
@@ -72,7 +65,7 @@ function SimpleDialog(props) {
           </ListItem>
         ))}
 
-        <ListItem
+        {/* <ListItem
           autoFocus
           button
           onClick={() => handleListItemClick("addAccount")}
@@ -83,7 +76,7 @@ function SimpleDialog(props) {
             </Avatar>
           </ListItemAvatar>
           <ListItemText primary="Add account" />
-        </ListItem>
+        </ListItem> */}
       </List>
     </Dialog>
   );
@@ -95,42 +88,89 @@ SimpleDialog.propTypes = {
   // selectedValue: PropTypes.string.isRequired,
 };
 
+function RenderMembers(props) {
+  console.log("OUTPUT: RenderMembers -> props", props);
+  const members = useSelector(state => state.groups);
+  if (!members) return null;
+
+  // const eachGroupId = members.map(member => member.id)
+  // const usernames = members.users.map(user => user.username)
+  const result = members.find(member => member.id === props.groupId);
+  console.log("OUTPUT: RenderMembers -> result", result);
+
+  // if (eachgroupId === props.groupId) {
+  //   const result = members.find(member => member.id === id)
+  // }
+  return (
+    <div>
+      {result.users.map(user => (
+        <ul>
+          <PersonIcon />
+          {user.username}
+        </ul>
+      ))}
+    </div>
+  );
+}
+
+//container
 export default function SimpleDialogDemo(props) {
-  console.log("OUTPUT: SimpleDialogDemo -> props", props);
+  console.log("OUTP?UT: SimpleDialogDemo -> props", props);
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = useState([]);
-  console.log("OUTPUT: SimpleDialogDemo -> selectedValue", selectedValue);
+  // const [selectedValue, setSelectedValue] = useState([]);
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(fetchGroups());
     dispatch(fetchUsers());
   }, []);
 
   const users = useSelector(state => state.member.users);
+  const members = useSelector(state => state.groups);
+  console.log("OUTPUT: SimpleDialogDemo -> members", members);
   if (!users) return "loading...";
+  if (!members) return null;
 
-  const handleClickOpen = () => {
-    dispatch(fetchGroup(Number(props.groupId)));
+  // const memberUsername = members.map(member => member.username);
+  // console.log("OUTPUT: SimpleDialogDemo -> memberUsername", memberUsername)
+  const members2 = members.map(member => member.users.username);
+  console.log("OUTPUT: SimpleDialogDemo -> members2", members2);
+  // const RenderMembers = (members, Component) => {
+  //   return members.map(member => (
+  //     <Component key={member.id} username={member.username} id={member.id} />
+  //   ))
+  // }
+
+  const handleClickOpen = id => {
+    dispatch(fetchGroup(id));
     setOpen(true);
   };
 
-  const handleClose = value => {
-    console.log("OUTPUT: SimpleDialogDemo -> value", value);
+  const handleClose = () => {
     setOpen(false);
-    setSelectedValue([...selectedValue, value]);
+    // setSelectedValue([...selectedValue, value]);
+    dispatch(fetchGroups());
   };
+
   return (
     <div>
-      <Typography variant="subtitle1">Members: {selectedValue}</Typography>
+      <Typography variant="subtitle1">
+        Members:
+        <RenderMembers groupId={props.groupId} />
+      </Typography>
       <br />
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button
+        variant="outlined"
+        color="primary"
+        onClick={() => handleClickOpen(props.groupId)}
+      >
         <GroupAddRoundedIcon />
       </Button>
       <SimpleDialog
-        selectedValue={selectedValue}
         open={open}
         onClose={handleClose}
         users={users}
+        members={members2}
         groupId={props.groupId}
       />
     </div>

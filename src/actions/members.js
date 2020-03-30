@@ -3,7 +3,7 @@ import axios from "axios";
 export const USERS_FETCHED = "USERS_FETCHED";
 export const MEMBER_ADDED = "MEMBER_ADDED";
 export const USER_REMOVED = "USER_REMOVED";
-export const MEMBERS_FETCHED = "MEMBERS_FETCHED"
+export const MEMBERS_FETCHED = "MEMBERS_FETCHED";
 
 const baseUrl = "http://localhost:4000";
 
@@ -34,25 +34,37 @@ function memberAdded(member) {
   };
 }
 
-function userRemoved (userId) {
+function userRemoved(userId) {
   return {
     type: USER_REMOVED,
     userId
   };
 }
 
-function membersFetched (members) {
+function membersFetched(members) {
   return {
     type: MEMBERS_FETCHED,
     members
-  }
+  };
 }
+
+// export const fetchMembers = groupId => {
+//   return async function(dispatch) {
+//     await axios
+//       .get(`${baseUrl}/groupUser/${groupId}`)
+//       .then(res => {
+//         dispatch(membersFetched(res.data));
+//       })
+//       .catch(console.error);
+//   };
+// };
 
 export const addMember = userId => {
   return async function(dispatch, getState) {
     const groupId = getState().group.map(g => g.id);
-    console.log("OUTPUT: groupId", groupId)
+    console.log("OUTPUT: groupId", groupId);
 
+    //add userId and groupId into GroupUser table based on groupId chosen
     const response = await axios({
       method: "POST",
       url: `${baseUrl}/groupUser/member`,
@@ -65,11 +77,11 @@ export const addMember = userId => {
     await axios
       .get(`${baseUrl}/groupUser/${groupId}`)
       .then(res => {
-        dispatch(membersFetched(res.data))
+        dispatch(membersFetched(res.data));
       })
+      .catch(console.error);
 
     dispatch(memberAdded(response.data));
-    dispatch(userRemoved(response.data.userId))
+    dispatch(userRemoved(response.data.userId));
   };
 };
-
