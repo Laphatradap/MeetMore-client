@@ -52,27 +52,27 @@ export const fetchAvailability = () => (dispatch, getState) => {
 };
 
 
-// Fetch availability based on userId (axios)
+// // Fetch availability based on userId (axios)
 
-function availabilityFetched(allEntity) {
-  return {
-    type: AVAILABILITY_FETCHED,
-    payload: allEntity
-    }
-  }
-export const fetchAvailability = () => {
-    return async function(dispatch, getState) {
-      const token = getState().user.token;
-      const response = await axios({
-        method: "GET",
-        url: `${baseUrl}/availability`,
-        headers: { authorization: `Bearer ${token}` },
-        data: {
-          startDate,
-          endDate
-        }
-      });
-      console.log(response.data);
-      dispatch(availabilityFetched(response.data));
-    };
-  };
+// function availabilityFetched(allEntity) {
+//   return {
+//     type: AVAILABILITY_FETCHED,
+//     payload: allEntity
+//     }
+//   }
+// export const fetchAvailability = () => {
+//     return async function(dispatch, getState) {
+//       const token = getState().user.token;
+//       const response = await axios({
+//         method: "GET",
+//         url: `${baseUrl}/availability`,
+//         headers: { authorization: `Bearer ${token}` },
+//         data: {
+//           startDate,
+//           endDate
+//         }
+//       });
+//       console.log(response.data);
+//       dispatch(availabilityFetched(response.data));
+//     };
+//   };
