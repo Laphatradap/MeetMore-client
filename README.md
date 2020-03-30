@@ -3,8 +3,6 @@
 ## What this project is about
 This repository is a client-side of my first full-stack application, demonstraing my understanding of Javascript and React + Redux. Here is my goal.
 
-Meet More is a full-stack application that helps users find suitable dates and activities for group meet-ups in a few clicks! This repo is the front-end part.
-
 ### Table of contents
 - Technologies used
 - Goals for this project
