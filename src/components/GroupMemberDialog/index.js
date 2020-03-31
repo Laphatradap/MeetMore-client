@@ -94,12 +94,12 @@ function RenderMembers(props) {
 //container
 export default function GroupMemberDialog(props) {
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch(); 
 
-  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchGroups());
     dispatch(fetchUsers());
-  }, []);
+    dispatch(fetchGroups())
+  },[]);
 
   const users = useSelector(state => state.member.users);
   const members = useSelector(state => state.groups);
