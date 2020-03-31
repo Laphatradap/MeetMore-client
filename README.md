@@ -3,15 +3,6 @@
 ## What this project is about
 This repository is a client-side of my full-stack application, demonstraing my understanding of Javascript and React + Redux.
 
-### Table of contents
-- Goals for this project
-- Technologies used
-- Feature built so far
-- Git workflow
-- Create React App
-
----
-
 ## Goals for this project:
 - An attempt to solve my real-life issue of scheduling group meet-ups
 - To work on a bigger project
@@ -20,15 +11,14 @@ This repository is a client-side of my full-stack application, demonstraing my u
 - To showcase disciplined git usage
 
 ## Technologies used
-- React
-- Redux
-- Express
-- Material-UI
+- [React](https://github.com/Laphatradap/MeetMore-client/tree/master/src/components)
+- [Redux](https://github.com/Laphatradap/MeetMore-client/tree/master/src/actions)
+- [Material-UI](https://github.com/Laphatradap/MeetMore-client/blob/master/src/components/Availability/DateTimePicker.js)
 
 ## Features built so far
-- Feat/availability
-- Feat/groups
-- Styling
+- [Feat/availability](https://github.com/Laphatradap/MeetMore-client/pull/2)
+- [Feat/groups](https://github.com/Laphatradap/MeetMore-client/pull/4)
+- [Styling](https://github.com/Laphatradap/MeetMore-client/pull/5)
 
 ## Git workflow
 In this project I try to use:
