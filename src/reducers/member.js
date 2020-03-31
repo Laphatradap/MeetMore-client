@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  // console.log("OUTPUT: member state", state)
   switch (action.type) {
     case USERS_FETCHED:
       return { ...state, users: action.users };

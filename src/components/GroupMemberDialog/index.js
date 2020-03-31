@@ -30,7 +30,6 @@ function SimpleDialog(props) {
   const dispatch = useDispatch();
 
   const { onClose, open, users, members } = props;
-  console.log("OUTPUT: SimpleDialog -> members", members);
 
   const handleClose = () => {
     onClose(members);
@@ -63,19 +62,6 @@ function SimpleDialog(props) {
             <ListItemText primary={user.username} />
           </ListItem>
         ))}
-
-        {/* <ListItem
-          autoFocus
-          button
-          onClick={() => handleListItemClick("addAccount")}
-        >
-          <ListItemAvatar>
-            <Avatar>
-              <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="Add account" />
-        </ListItem> */}
       </List>
     </Dialog>
   );
@@ -84,24 +70,15 @@ function SimpleDialog(props) {
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired
-  // selectedValue: PropTypes.string.isRequired,
 };
 
 function RenderMembers(props) {
-  console.log("OUTPUT: RenderMembers -> props", props);
   const members = useSelector(state => state.groups);
-  const userloggedin = useSelector (state => state.user.id)
+  const userloggedin = useSelector(state => state.user.id);
   if (!members) return null;
-  if(!userloggedin) return null
+  if (!userloggedin) return null;
 
-  // const eachGroupId = members.map(member => member.id)
-  // const usernames = members.users.map(user => user.username)
   const result = members.find(member => member.id === props.groupId);
-  console.log("OUTPUT: RenderMembers -> result", result);
-
-  // if (eachgroupId === props.groupId) {
-  //   const result = members.find(member => member.id === id)
-  // }
   return (
     <div>
       {result.users.map(user => (
@@ -115,10 +92,8 @@ function RenderMembers(props) {
 }
 
 //container
-export default function SimpleDialogDemo(props) {
-  console.log("OUTP?UT: SimpleDialogDemo -> props", props);
+export default function GroupMemberDialog(props) {
   const [open, setOpen] = React.useState(false);
-  // const [selectedValue, setSelectedValue] = useState([]);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -128,19 +103,10 @@ export default function SimpleDialogDemo(props) {
 
   const users = useSelector(state => state.member.users);
   const members = useSelector(state => state.groups);
-  console.log("OUTPUT: SimpleDialogDemo -> members", members);
   if (!users) return "loading...";
   if (!members) return null;
 
-  // const memberUsername = members.map(member => member.username);
-  // console.log("OUTPUT: SimpleDialogDemo -> memberUsername", memberUsername)
   const members2 = members.map(member => member.users.username);
-  console.log("OUTPUT: SimpleDialogDemo -> members2", members2);
-  // const RenderMembers = (members, Component) => {
-  //   return members.map(member => (
-  //     <Component key={member.id} username={member.username} id={member.id} />
-  //   ))
-  // }
 
   const handleClickOpen = id => {
     dispatch(fetchGroup(id));
@@ -149,7 +115,6 @@ export default function SimpleDialogDemo(props) {
 
   const handleClose = () => {
     setOpen(false);
-    // setSelectedValue([...selectedValue, value]);
     dispatch(fetchGroups());
   };
 

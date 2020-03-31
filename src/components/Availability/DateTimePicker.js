@@ -13,8 +13,8 @@ import { addAvailability } from "../../actions/availability";
 
 function DateTimePicker() {
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState(new Date("2020-03-01T12:00:00"));
-  const [endDate, setEndDate] = useState(new Date("2020-03-01T12:00:00"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const handleStartDateChange = date => {
     setStartDate(date);

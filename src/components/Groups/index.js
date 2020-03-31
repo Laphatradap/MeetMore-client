@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { Link } from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-// import GroupAddRoundedIcon from "@material-ui/icons/GroupAddRounded";
 import Typography from "@material-ui/core/Typography";
-import SimpleDialogDemo from "../Dialog";
+import GroupMemberDialog from "../GroupMemberDialog";
 import { fetchGroups } from "../../actions/group";
-// import GroupMember from "../GroupMember";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +17,6 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
     textAlign: "center"
-    // color: theme.palette.text.secondary,
   }
 }));
 
@@ -48,9 +44,7 @@ export default function GroupsContainer() {
                   <Paper component="h3" variant="h6" className={classes.paper}>
                     {group.groupName}
                     <Typography align="center">
-                      {/* <Link to={`/groups/${group.id}`}> */}
-                      <SimpleDialogDemo groupId={group.id} />
-                      {/* </Link> */}
+                      <GroupMemberDialog groupId={group.id} />
                     </Typography>
                   </Paper>
                 </Grid>

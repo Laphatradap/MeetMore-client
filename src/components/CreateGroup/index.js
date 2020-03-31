@@ -4,12 +4,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
 import { createGroup } from "../../actions/group";
 import GroupForm from "./GroupForm";
 import GroupsContainer from "../Groups";
-// import GroupMembers from '../GroupMember'
-// import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {

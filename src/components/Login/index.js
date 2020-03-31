@@ -11,7 +11,6 @@ export default function Login() {
     email: "",
     password: ""
   });
-  // console.log("OUTPUT: Login -> state", state)
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -31,7 +30,6 @@ export default function Login() {
 
   if (userLoggedIn) {
     setTimeout(() => {
-      // history.push("/availability");
       history.push("/create");
     }, 500);
     return <p>Login Successful!</p>;
