@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-// import { Link } from "react-router-dom";
-// import Button from '@material-ui/core/Button';
 import { fetchAvailability } from "../../actions/availability";
+import * as moment from "moment";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AvailabilityList(props) {
+export default function AvailabilityList() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -31,9 +30,21 @@ export default function AvailabilityList(props) {
     dispatch(fetchAvailability());
   }, []);
 
-  const entity = useSelector(state => state.availability);
   const username = useSelector(state => state.user.username);
+  const entity = useSelector(state => state.availability);
   if (!entity) return null;
+
+  // reformat dates for display using Moment.js
+  const datesFormatted = entity.map(date => {
+    var newObj = {};
+    newObj["startDate"] = moment(date.startDate).format(
+      "dddd, MMMM D YYYY, h:mm a"
+    );
+    newObj["endDate"] = moment(date.endDate).format(
+      "dddd, MMMM D YYYY, h:mm a"
+    );
+    return newObj;
+  });
 
   return (
     <div className={classes.root}>
@@ -43,23 +54,17 @@ export default function AvailabilityList(props) {
             {username}, your availabilities are:
           </Typography>
           <Typography>
-            {entity.map(e => (
+            {datesFormatted.map(date => (
               <ul>
                 <li>
-                  From {e.startDate.slice(0, 10)}
-                  at {e.startDate.slice(11, 16)}
+                  From {date.startDate}
+                  <br />
+                  To {date.endDate}
                   <br></br>
-                  From {e.endDate.slice(0, 10)}
-                  at {e.endDate.slice(11, 16)}
                 </li>
               </ul>
             ))}
           </Typography>
-          {/* <Link to={`/groups`}>
-            <Button variant="contained" color="primary">
-              next
-            </Button>
-          </Link> */}
         </Grid>
       </Grid>
     </div>

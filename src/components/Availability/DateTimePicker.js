@@ -12,22 +12,7 @@ import {
 import { addAvailability } from "../../actions/availability";
 
 function DateTimePicker() {
-  // const isLoggedIn = useSelector(state => state.user.token)
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if(!isLoggedIn) {
-  //     props.history.push("/login")
-  //   }
-  // }, [])
-
-  // componentDidMount = () => {
-  //   const isLoggedIn = props.user.token;
-  //   if (!isLoggedIn) {
-  //     props.history.push("/login");
-  //   }
-  // };
-
   const [startDate, setStartDate] = useState(new Date("2020-03-01T12:00:00"));
   const [endDate, setEndDate] = useState(new Date("2020-03-01T12:00:00"));
 
@@ -42,7 +27,6 @@ function DateTimePicker() {
   return (
     <div>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        {/* <Grid container justify="space-around"> */}
         <Grid>
           <KeyboardDatePicker
             margin="normal"

@@ -74,15 +74,3 @@ export const fetchGroup = id => async dispatch => {
     })
     .catch(console.error);
 };
-
-// Create a group without passing UserId from redux state
-// export const createGroup = (data) => (dispatch) => {
-//   console.log("created group data", data)
-//   request
-//     .post(`${baseUrl}/groups`)
-//     .send({name: data})
-//     .then(res => {
-//       dispatch(groupCreated(res.body));
-//     })
-//     .catch(console.error);
-// };

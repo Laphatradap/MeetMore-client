@@ -47,21 +47,11 @@ function membersFetched(members) {
   };
 }
 
-// export const fetchMembers = groupId => {
-//   return async function(dispatch) {
-//     await axios
-//       .get(`${baseUrl}/groupUser/${groupId}`)
-//       .then(res => {
-//         dispatch(membersFetched(res.data));
-//       })
-//       .catch(console.error);
-//   };
-// };
-
 export const addMember = userId => {
   return async function(dispatch, getState) {
     const groupId = getState().group.map(g => g.id);
-    //add userId and groupId into GroupUser table based on groupId chosen
+
+    // add userId and groupId to groupUser table based on groupId chosen
     const response = await axios({
       method: "POST",
       url: `${baseUrl}/groupUser/member`,
@@ -71,12 +61,15 @@ export const addMember = userId => {
       }
     });
 
+    // fetch all members from groupUser table based on groupId
     await axios
       .get(`${baseUrl}/groupUser/${groupId}`)
       .then(res => {
         dispatch(membersFetched(res.data));
       })
       .catch(console.error);
+    
+    // when member is added, remove that member from friend list (users)
     dispatch(memberAdded(response.data));
     dispatch(userRemoved(response.data.userId));
   };
