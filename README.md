@@ -1,7 +1,7 @@
-# Meet More
+# Meet More 
 
 ## What this project is about
-This repository is a client-side of my first full-stack application, demonstraing my understanding of Javascript and React + Redux. Here is my goal.
+This repository is a client-side of my first full-stack application, demonstraing my understanding of Javascript and React + Redux. Checkout My goals.
 
 ### Table of contents
 - Technologies used
@@ -10,13 +10,16 @@ This repository is a client-side of my first full-stack application, demonstrain
 
 ## Goals for this project:
 - To practice working on a bigger project
-- To showcase what I have learned during my coding bootcamp at Codaisseur
-- To show disciplined git usage
+- To apply what I have learned during my coding bootcamp at Codaisseur
+- To practice development approach of using wireframes and user stories [(kanban board)](https://trello.com/b/uqJ4GRoN/friend-lendar)
+- To showcase disciplined git usage
 
+## 
 ## Technologies used
-- React (FP)
+- React
 - Redux
-- Redux-Thunk
+- Express
+- Material-UI
 
 ## Features built so far overview with pull requests
 - Feat/availability
