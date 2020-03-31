@@ -1,47 +1,72 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import { fetchAvailability } from "../../actions/availability";
-import CreateGroupContainer from "../CreateGroup"
-// import AddMember from "../AddMember";
+import * as moment from "moment";
 
-class AvailabilityListContainer extends Component {
-  componentDidMount() {
-    this.props.fetchAvailability();
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  item: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    margin: "0 auto"
+  },
+  title: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    textAlign: "center"
   }
+}));
 
-  render() {
-    if (!this.props.entity) return null;
-    return (
-      <div>
-        <br></br>
-        <h1>{this.props.user.username}, your availability are:</h1>
-        <div>
-          {this.props.entity.map(e => (
-            <ul key={e.id}>
-              <li>
-                From {e.startDate.slice(0, 10)} at
-                {e.startDate.slice(11, 16)}
-                <br></br>
-                To {e.endDate.slice(0, 10)} at
-                {e.endDate.slice(11, 16)}
-              </li>
-            </ul>
-          ))}
-        </div>
-        <CreateGroupContainer />
-        {/* <AddMember /> */}
-      </div>
+export default function AvailabilityList() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAvailability());
+  }, []);
+
+  const username = useSelector(state => state.user.username);
+  const entity = useSelector(state => state.availability);
+  if (!entity) return null;
+
+  // reformat dates for display using Moment.js
+  const datesFormatted = entity.map(date => {
+    var newObj = {};
+    newObj["startDate"] = moment(date.startDate).format(
+      "dddd, MMMM D YYYY, h:mm a"
     );
-  }
-}
+    newObj["endDate"] = moment(date.endDate).format(
+      "dddd, MMMM D YYYY, h:mm a"
+    );
+    return newObj;
+  });
 
-const mapStateToProps = state => {
-  // console.log("state of AvailabilityList", state);
-  return {
-    entity: state.availability,
-    user: state.user
-  };
-};
-export default connect(mapStateToProps, { fetchAvailability })(
-  AvailabilityListContainer
-);
+  return (
+    <div className={classes.root}>
+      <Grid container justify="center" direction="column" spacing={3}>
+        <Grid item className={classes.item}>
+          <Typography component="h1" variant="h5" className={classes.title}>
+            {username}, your availabilities are:
+          </Typography>
+          <Typography>
+            {datesFormatted.map(date => (
+              <ul>
+                <li>
+                  From {date.startDate}
+                  <br />
+                  To {date.endDate}
+                  <br></br>
+                </li>
+              </ul>
+            ))}
+          </Typography>
+        </Grid>
+      </Grid>
+    </div>
+  );
+}

@@ -3,7 +3,7 @@ import axios from "axios";
 export const USERS_FETCHED = "USERS_FETCHED";
 export const MEMBER_ADDED = "MEMBER_ADDED";
 export const USER_REMOVED = "USER_REMOVED";
-export const MEMBERS_FETCHED = "MEMBERS_FETCHED"
+export const MEMBERS_FETCHED = "MEMBERS_FETCHED";
 
 const baseUrl = "http://localhost:4000";
 
@@ -16,7 +16,6 @@ function usersFetched(users) {
 }
 
 export const fetchUsers = () => async (dispatch, getState) => {
-  // if(getState().member.members) return;
   const loggedUserId = getState().user.id;
   await axios
     .get(`${baseUrl}/users/${loggedUserId}`)
@@ -34,24 +33,25 @@ function memberAdded(member) {
   };
 }
 
-function userRemoved (userId) {
+function userRemoved(userId) {
   return {
     type: USER_REMOVED,
     userId
   };
 }
 
-function membersFetched (members) {
+function membersFetched(members) {
   return {
     type: MEMBERS_FETCHED,
     members
-  }
+  };
 }
 
 export const addMember = userId => {
   return async function(dispatch, getState) {
     const groupId = getState().group.map(g => g.id);
 
+    // add userId and groupId to groupUser table based on groupId chosen
     const response = await axios({
       method: "POST",
       url: `${baseUrl}/groupUser/member`,
@@ -61,14 +61,16 @@ export const addMember = userId => {
       }
     });
 
+    // fetch all members from groupUser table based on groupId
     await axios
       .get(`${baseUrl}/groupUser/${groupId}`)
       .then(res => {
-        dispatch(membersFetched(res.data))
+        dispatch(membersFetched(res.data));
       })
-
+      .catch(console.error);
+    
+    // when member is added, remove that member from friend list (users)
     dispatch(memberAdded(response.data));
-    dispatch(userRemoved(response.data.userId))
+    dispatch(userRemoved(response.data.userId));
   };
 };
-

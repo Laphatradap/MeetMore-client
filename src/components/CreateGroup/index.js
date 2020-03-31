@@ -1,52 +1,69 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 import { createGroup } from "../../actions/group";
 import GroupForm from "./GroupForm";
-import GroupDetails from "../Group";
-// import {Link} from 'react-router-dom'
+import GroupsContainer from "../Groups";
 
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-class
- CreateGroupContainer extends Component {
-  state = {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    margin: "0 auto"
+  },
+  title: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    textAlign: "center"
+  }
+}));
+
+export default function CreateGroupContainer() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
     groupName: ""
+  });
+
+  const onChange = event => {
+    const { name, value } = event.target;
+    setState(previousValue => ({
+      ...previousValue,
+      [name]: value
+    }));
   };
 
-  onChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-
-  onSubmit = event => {
+  const onSubmit = event => {
     event.preventDefault();
-    this.props.createGroup(this.state.groupName);
-    this.setState({
+    dispatch(createGroup(state.groupName));
+    setState({
       groupName: ""
     });
-    // this.props.history.push("/groups")
   };
 
-  render() {
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container>
-          <Typography>
-            <h1>Create a new group</h1>
-            <GroupForm
-              onSubmit={this.onSubmit}
-              onChange={this.onChange}
-              values={this.state}
-            />
-          </Typography>
-          <GroupDetails />
-        </Container>
-      </React.Fragment>
-    );
-  }
+  return (
+    <div className={classes.root}>
+      <Grid container justify="center" direction="column" spacing={3}>
+        <Grid item xs={8} sm container>
+          <Paper className={classes.paper}>
+            <Typography component="h1" variant="h5" className={classes.title}>
+              Create a new group
+            </Typography>
+            <GroupForm onSubmit={onSubmit} onChange={onChange} values={state} />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} container>
+          <Paper className={classes.paper}>
+            <GroupsContainer />
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
-
-export default connect(null, { createGroup })(CreateGroupContainer);

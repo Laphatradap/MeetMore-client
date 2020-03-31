@@ -5,11 +5,9 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Header from "./components/Header";
-import AvailabilityListContainer from "./components/Availability";
-// import CreateGroupContainer from "./components/CreateGroup";
-import GroupMemberContainer from "./components/GroupMember";
-// import GroupDetails from "./components/Group";
-import Home from "./components/Home"
+import Stepper from "./components/Stepper";
+import Home from "./components/Home";
+
 class App extends React.Component {
   protectedRoutes = (Component, routerProps) => {
     const { token } = this.props;
@@ -24,9 +22,7 @@ class App extends React.Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/availability" component={AvailabilityListContainer} />
-          {/* <Route exact path="/groups" component={CreateGroupContainer} /> */}
-          <Route exact path="/groups/:id" component={GroupMemberContainer} />
+          <Route exact path="/create" component={Stepper} />
         </Router>
       </div>
     );

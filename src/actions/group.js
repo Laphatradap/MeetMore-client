@@ -29,7 +29,7 @@ export const createGroup = name => {
     // when group is created, add groupId and UserId to GroupUser table
     const groupId = response.data.id;
     const userId = getState().user.id;
-    const response2 = await axios({
+    await axios({
       method: "POST",
       url: `${baseUrl}/groupUser`,
       data: {
@@ -37,7 +37,6 @@ export const createGroup = name => {
         userId: userId
       }
     });
-    console.log("res data2", response2.data);
   };
 };
 
@@ -68,7 +67,6 @@ function groupFetched(group) {
 }
 
 export const fetchGroup = id => async dispatch => {
-  // console.log("OUTPUT: id of fetchGroup", id);
   await axios
     .get(`${baseUrl}/groups/${id}`)
     .then(res => {
@@ -76,15 +74,3 @@ export const fetchGroup = id => async dispatch => {
     })
     .catch(console.error);
 };
-
-// Create a group without passing UserId from redux state
-// export const createGroup = (data) => (dispatch) => {
-//   console.log("created group data", data)
-//   request
-//     .post(`${baseUrl}/groups`)
-//     .send({name: data})
-//     .then(res => {
-//       dispatch(groupCreated(res.body));
-//     })
-//     .catch(console.error);
-// };
