@@ -29,30 +29,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignUpLoginForm(props) {
+export default function SignUpLoginForm (props) {
+  const { text, handleSubmit, handleChange, values, login } = props;
   const classes = useStyles();
+  const { paper, avatar, form, submit } = classes;
   return (
     <>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-          </Avatar>
+        <div className={paper}>
+          <Avatar className={avatar}></Avatar>
           <Typography component="h1" variant="h5">
-            {props.text}
+            {text}
           </Typography>
-          <form
-            className={classes.form}
-            noValidate
-            onSubmit={props.handleSubmit}
-          >
+          <form className={form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
-              {!props.login && (
+              {!login && (
                 <>
                   <Grid item xs={12}>
                     <TextField
-                      value={props.values.username}
-                      onChange={props.handleChange}
+                      value={values.username}
+                      onChange={handleChange}
                       name="username"
                       variant="outlined"
                       required
@@ -69,7 +66,7 @@ export default function SignUpLoginForm(props) {
               <Grid item xs={12}>
                 <TextField
                   value={props.values.email}
-                  onChange={props.handleChange}
+                  onChange={handleChange}
                   variant="outlined"
                   required
                   fullWidth
@@ -81,8 +78,8 @@ export default function SignUpLoginForm(props) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  value={props.values.password}
-                  onChange={props.handleChange}
+                  value={values.password}
+                  onChange={handleChange}
                   variant="outlined"
                   required
                   fullWidth
@@ -98,12 +95,12 @@ export default function SignUpLoginForm(props) {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className={submit}
             >
-              {props.text}{" "}
+              {text}
             </Button>
             <Grid container justify="flex-end">
-              {!props.login && (
+              {!login && (
                 <>
                   <Grid item>
                     <Link to="/login" variant="body2">
