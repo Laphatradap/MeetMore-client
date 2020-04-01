@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// import "./App.css";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import Header from "./components/Header";
+import Stepper from "./components/Stepper";
+import Home from "./components/Home";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  protectedRoutes = (Component, routerProps) => {
+    const { token } = this.props;
+    return token ? <Component {...routerProps} /> : <Redirect to="/login" />;
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <Header />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/create" component={Stepper} />
+        </Router>
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    token: state.user.token
+  };
+};
+
+export default connect(mapStateToProps)(App);
