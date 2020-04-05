@@ -35,7 +35,7 @@ function Availability() {
   return (
     <div className={classes.root}>
       <Grid container justify="center" direction="column" spacing={3}>
-        <Grid item xs={8} sm container>
+        <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h5" className={classes.title}>
               Which dates are you free to hang out?

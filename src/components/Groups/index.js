@@ -34,13 +34,13 @@ export default function GroupsContainer() {
     <div clasName={classes.root}>
       {groups.length !== 0 && (
         <>
-          <Grid container spacing={3}>
+          <Grid container spacing={10}>
             <Grid item xs={12} component="h2" variant="h6">
               your groups are:
             </Grid>
             <>
               {groups.map(group => (
-                <Grid item xs={3}>
+                <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
                   <Paper component="h3" variant="h6" className={classes.paper}>
                     {group.groupName}
                     <Typography align="center">
