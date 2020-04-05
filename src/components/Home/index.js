@@ -1,39 +1,67 @@
 import React from "react";
-// import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-// import Stepper from '../Stepper'
-// import PrimaryStyles from "../MaterialUI/PrimaryStyles";
-import { makeStyles } from "@material-ui/core";
-import HomeBanner from "../../Images/home_banner.jpg"
+// import { useSelector } from "react-redux";
+// import { useHistory } from "react-router-dom";
+import { makeStyles, Paper, Grid, Button, Typography } from "@material-ui/core";
+// import HomeBanner from "../../Images/home_banner.jpg";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'block',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundImage: `url(${HomeBanner})`
-   },
-   backgroundImg: {
-    backgroundImage: `url(${HomeBanner})`,
-    width: "30", 
-    height: "600",
-    padding: "auto",
-    opacity: 0.5
-   }
-}))
-export default function Home() {
+    flexGrow: 1,
+    marginTop: theme.spacing(8)
+  },
+  paper: {
+    padding: theme.spacing(),
+    textAlign: "center"
+    // backgroundImage: `url(${HomeBanner})`,
+    // height: 500,
+    // backgroundSize: "cover",
+    // backgroundPosition: "center"
+  },
+  title: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(1),
+    textAlign: "center"
+  },
+  button: {
+    marginTop: theme.spacing(4)
+  }
+}));
+
+export default function Homepage() {
   const classes = useStyles();
+  // const history = useHistory();
 
+  // const userLoggedIn = useSelector(state => state.user.token !== null);
 
-
+  // if (userLoggedIn) {
+  //   setTimeout(() => {
+  //     history.push("/create");
+  //   }, 500);
+  //   return <p>Login Successful!</p>;
+  // }
   return (
-    <React.Fragment>
-      {/* <CssBaseline /> */}
-      <Container className={classes.root} maxWidth="false">
-        <Typography className={classes.backgroundImg}>Schedule Once, Meet More!</Typography>
-      </Container>
-    </React.Fragment>
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item sm={12}>
+          <Paper className={classes.paper}>
+            <Typography
+              component="h1"
+              variant="h3"
+              className={classes.title}
+              color="textPrimary"
+            >
+              Schedule Once, Meet More
+            </Typography>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="primary"
+            >
+              Start Scheduling!
+            </Button>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
   );
 }

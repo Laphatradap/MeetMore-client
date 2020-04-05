@@ -6,7 +6,7 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Header from "./components/Header";
 import Stepper from "./components/Stepper";
-import Home from "./components/Home";
+// import Home from "./components/Home";
 
 class App extends React.Component {
   protectedRoutes = (Component, routerProps) => {
@@ -19,7 +19,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <Header />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Stepper} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/create" component={Stepper} />
