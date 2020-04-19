@@ -8,12 +8,13 @@ import Typography from "@material-ui/core/Typography";
 import Availability from "../Availability";
 import CreateGroup from "../CreateGroup";
 import Grid from "@material-ui/core/Grid";
+import MatchedAvailability from "../Availability/MatchedAvailability";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     flexGrow: 1,
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(8)
   },
   button: {
     marginRight: theme.spacing(1)
@@ -41,7 +42,7 @@ function getStepContent(step) {
     case 1:
       return <CreateGroup />;
     case 2:
-      return "Step 3";
+      return <MatchedAvailability />;
     default:
       return "Unknown step";
   }
