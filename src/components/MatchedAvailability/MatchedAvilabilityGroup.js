@@ -12,9 +12,11 @@ export default function MatchedAvilabilityGroup(props) {
 
   const result = matches.find((match) => match.groupId === groupId);
 
-  const members = result.userInfo.filter((r) => r != userloggedin);
+  const members = result.memberNames
+    .filter((r) => r != userloggedin)
+    .map((el) => el.username);
 
-  const datesFormatted = result.matches.map((date) => {
+  const datesFormatted = result.matchedRanges.map((date) => {
     var newObj = {};
     newObj["startDate"] = moment(date.rangeBegin).format(
       "dddd, MMMM D YYYY, h:mm a"
@@ -27,12 +29,15 @@ export default function MatchedAvilabilityGroup(props) {
 
   return (
     <div>
-      {result.matches.length === 0 ? (
+      {result.matchedRanges.length === 0 ? (
         <Typography>No matched availability</Typography>
       ) : (
         <>
           <Typography>
-            Members available: {members}
+            Available members:
+            {result.memberNames.map((el) => (
+                <div>{el.username}</div>
+            ))}
             {datesFormatted.map((date) => (
               <ul>
                 <li>
