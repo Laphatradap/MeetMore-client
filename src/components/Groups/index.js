@@ -40,7 +40,7 @@ export default function GroupsContainer() {
             </Grid>
             <>
               {groups.map(group => (
-                <Grid item xs={12} sm={6} md={4} lg={4} xl={3}>
+                <Grid item xs={12} sm={6} >
                   <Paper component="h3" variant="h6" className={classes.paper}>
                     {group.groupName}
                     <Typography align="center">

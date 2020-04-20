@@ -33,6 +33,7 @@ export default function AvailabilityList() {
   const username = useSelector(state => state.user.username);
   const entity = useSelector(state => state.availability);
   if (!entity) return null;
+  // console.log("OUTPUT: AvailabilityList -> entity", entity)
 
   // reformat dates for display using Moment.js
   const datesFormatted = entity.map(date => {

@@ -73,12 +73,13 @@ SimpleDialog.propTypes = {
 };
 
 function RenderMembers(props) {
-  const members = useSelector(state => state.groups);
+  const groups = useSelector(state => state.groups);
   const userloggedin = useSelector(state => state.user.id);
-  if (!members) return null;
+  if (!groups) return null;
   if (!userloggedin) return null;
 
-  const result = members.find(member => member.id === props.groupId);
+  // find the group that matches the currently rendered group
+  const result = groups.find(group => group.id === props.groupId);
   return (
     <div>
       {result.users.map(user => (

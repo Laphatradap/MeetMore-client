@@ -60,6 +60,9 @@ export default function CreateGroupContainer() {
         </Grid>
         <Grid item xs={12} container>
           <Paper className={classes.paper}>
+            <Typography>
+              {state.groupName}
+            </Typography>
             <GroupsContainer />
           </Paper>
         </Grid>
