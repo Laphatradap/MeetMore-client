@@ -3,12 +3,10 @@ import {
   AVAILABILITY_FETCHED,
 } from "../actions/availability";
 
-const initialstate = [];
-
-export default (state = initialstate, action) => {
+export default (state = null, action) => {
   switch (action.type) {
     case AVAILABILITY_ADDED:
-      return [...state, action.payload];
+      return [...state, action.payload.entity];
 
     case AVAILABILITY_FETCHED:
       return action.payload;

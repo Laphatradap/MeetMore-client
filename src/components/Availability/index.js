@@ -8,20 +8,20 @@ import { addAvailability } from "../../actions/availability";
 import AvailabilityList from "./AvailabilityList";
 import DateTimePicker from "./DateTimePicker";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   title: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 function Availability() {
@@ -42,7 +42,7 @@ function Availability() {
             </Typography>
             <br></br>
             <DateTimePicker />
-            <br></br>[]
+            <br></br>
             <AvailabilityList />
           </Paper>
         </Grid>
@@ -51,7 +51,7 @@ function Availability() {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { user: state.user };
 };
 

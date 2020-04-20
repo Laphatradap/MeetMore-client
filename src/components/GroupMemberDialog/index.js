@@ -20,8 +20,8 @@ import { fetchGroup, fetchGroups } from "../../actions/group";
 const useStyles = makeStyles({
   avatar: {
     backgroundColor: blue[100],
-    color: blue[600]
-  }
+    color: blue[600],
+  },
 });
 
 //dialog popup
@@ -48,7 +48,7 @@ function SimpleDialog(props) {
     >
       <DialogTitle id="simple-dialog-title">Add members</DialogTitle>
       <List>
-        {users.map(user => (
+        {users.map((user) => (
           <ListItem
             button
             onClick={() => handleListItemClick(user.id, user.username)}
@@ -69,25 +69,26 @@ function SimpleDialog(props) {
 
 SimpleDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired
+  open: PropTypes.bool.isRequired,
 };
 
 function RenderMembers(props) {
-  const groups = useSelector(state => state.groups);
-  const userloggedin = useSelector(state => state.user.id);
+  const groups = useSelector((state) => state.groups);
+  const userloggedin = useSelector((state) => state.user.id);
   if (!groups) return null;
   if (!userloggedin) return null;
 
   // find the group that matches the currently rendered group
-  const result = groups.find(group => group.id === props.groupId);
+  // const result = groups.find(group => group.id === props.groupId);
   return (
     <div>
-      {result.users.map(user => (
+      Hi
+      {/* {result.users.map(user => (
         <ul>
           <PersonIcon />
           {user.username}
         </ul>
-      ))}
+      ))} */}
     </div>
   );
 }
@@ -95,28 +96,28 @@ function RenderMembers(props) {
 //container
 export default function GroupMemberDialog(props) {
   const [open, setOpen] = React.useState(false);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUsers());
-    dispatch(fetchGroups())
-  },[]);
+    // dispatch(fetchGroups())
+  }, []);
 
-  const users = useSelector(state => state.member.users);
-  const members = useSelector(state => state.groups);
+  const users = useSelector((state) => state.member.users);
+  // const members = useSelector(state => state.groups);
   if (!users) return "loading...";
-  if (!members) return null;
+  // if (!members) return null;
 
-  const members2 = members.map(member => member.users.username);
+  // const members2 = members.map(member => member.users.username);
 
-  const handleClickOpen = id => {
+  const handleClickOpen = (id) => {
     dispatch(fetchGroup(id));
+    dispatch(fetchGroups());
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    dispatch(fetchGroups());
   };
 
   return (
@@ -137,7 +138,7 @@ export default function GroupMemberDialog(props) {
         open={open}
         onClose={handleClose}
         users={users}
-        members={members2}
+        // members={members2}
         groupId={props.groupId}
       />
     </div>
