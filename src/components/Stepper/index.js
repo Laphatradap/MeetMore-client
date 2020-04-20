@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Availability from "../Availability";
 import CreateGroup from "../CreateGroup";
 import Grid from "@material-ui/core/Grid";
-import MatchedAvailability from "../Availability/MatchedAvailability";
+import MatchedAvailability from "../MatchedAvailability";
 
 const useStyles = makeStyles(theme => ({
   root: {

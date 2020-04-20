@@ -32,9 +32,7 @@ export default function AvailabilityList() {
 
   const username = useSelector((state) => state.user.username);
   const entity = useSelector((state) => state.availability);
-  console.log("OUTPUT: AvailabilityList -> entity", entity !== [])
   if (!entity) return null;
-  // console.log("OUTPUT: AvailabilityList -> entity", entity)
 
   // reformat dates for display using Moment.js
   const datesFormatted = entity.map((date) => {
@@ -50,6 +48,8 @@ export default function AvailabilityList() {
 
   return (
     <div className={classes.root}>
+      {entity.length !== 0 && (
+        <>
           <Grid container justify="center" direction="column" spacing={3}>
             <Grid item className={classes.item}>
               <Typography component="h1" variant="h5" className={classes.title}>
@@ -69,6 +69,8 @@ export default function AvailabilityList() {
               </Typography>
             </Grid>
           </Grid>
+        </>
+      )}
     </div>
   );
 }
