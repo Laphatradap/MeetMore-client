@@ -4,20 +4,23 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import GroupMemberDialog from "../GroupMemberDialog";
+// import GroupMemberDialog from "../GroupMemberDialog";
 import { fetchGroups } from "../../actions/group";
+// import { fetchUsers } from "../../actions/members";
 
-const useStyles = makeStyles(theme => ({
+import AddMemberContainer from "../AddMember";
+
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     "& > span": {
-      margin: theme.spacing(2)
-    }
+      margin: theme.spacing(2),
+    },
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 export default function GroupsContainer() {
@@ -27,7 +30,7 @@ export default function GroupsContainer() {
     dispatch(fetchGroups());
   }, []);
 
-  const groups = useSelector(state => state.groups);
+  const groups = useSelector((state) => state.groups);
   if (!groups) return null;
 
   return (
@@ -39,12 +42,14 @@ export default function GroupsContainer() {
               your groups are:
             </Grid>
             <>
-              {groups.map(group => (
-                <Grid item xs={12} sm={6} >
+              {groups.map((group) => (
+                <Grid item xs={12} sm={6}>
                   <Paper component="h3" variant="h6" className={classes.paper}>
                     {group.groupName}
                     <Typography align="center">
-                      <GroupMemberDialog groupId={group.id} />
+                      <AddMemberContainer groupId={group.id} />
+                      <br></br>
+                      {/* <GroupMemberDialog groupId={group.id} /> */}
                     </Typography>
                   </Paper>
                 </Grid>

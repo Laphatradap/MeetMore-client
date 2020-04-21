@@ -1,32 +1,23 @@
 import {
   MEMBER_ADDED,
-  USERS_FETCHED,
-  USER_REMOVED,
-  MEMBERS_FETCHED
+  // USER_REMOVED,
+  // MEMBERS_FETCHED,
 } from "../actions/members";
 
-const initialState = {
-  users: [],
-  member: [],
-  members: []
-};
-
-export default (state = initialState, action) => {
+export default (state = null, action) => {
   switch (action.type) {
-    case USERS_FETCHED:
-      return { ...state, users: action.users };
+    // case MEMBERS_FETCHED:
+    //   return {members: action.members};
 
     case MEMBER_ADDED:
-      return { ...state, member: action.member };
+      return action.member
 
-    case USER_REMOVED:
-      return {
-        ...state,
-        users: state.users.filter(el => el.id !== action.userId)
-      };
+    // case USER_REMOVED:
+    //   return {
+    //     ...state,
+    //     users: state.users.filter(el => el.id !== action.userId)
+    //   };
 
-    case MEMBERS_FETCHED:
-      return { ...state, members: action.members };
     default:
       return state;
   }

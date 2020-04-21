@@ -30,6 +30,7 @@ function SimpleDialog(props) {
   const dispatch = useDispatch();
 
   const { onClose, open, users, members } = props;
+  // console.log("OUTPUT: SimpleDialog -> props", props)
 
   const handleClose = () => {
     onClose(members);
@@ -48,18 +49,18 @@ function SimpleDialog(props) {
     >
       <DialogTitle id="simple-dialog-title">Add members</DialogTitle>
       <List>
-        {users.map((user) => (
+        {users.map((u) => (
           <ListItem
             button
-            onClick={() => handleListItemClick(user.id, user.username)}
-            key={user.id}
+            onClick={() => handleListItemClick(u.id, u.username)}
+            key={u.id}
           >
             <ListItemAvatar>
               <Avatar className={classes.avatar}>
                 <PersonIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={user.username} />
+            <ListItemText primary={u.username} />
           </ListItem>
         ))}
       </List>
@@ -72,23 +73,16 @@ SimpleDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
+// show users that are clicked
 function RenderMembers(props) {
-  const groups = useSelector((state) => state.groups);
-  const userloggedin = useSelector((state) => state.user.id);
-  if (!groups) return null;
-  if (!userloggedin) return null;
-
-  // find the group that matches the currently rendered group
-  // const result = groups.find(group => group.id === props.groupId);
   return (
     <div>
-      Hi
-      {/* {result.users.map(user => (
+      {props.users.map((user) => (
         <ul>
           <PersonIcon />
           {user.username}
         </ul>
-      ))} */}
+      ))}
     </div>
   );
 }
@@ -97,22 +91,22 @@ function RenderMembers(props) {
 export default function GroupMemberDialog(props) {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-
   useEffect(() => {
+    dispatch(fetchGroups());
+
     dispatch(fetchUsers());
-    // dispatch(fetchGroups())
   }, []);
 
-  const users = useSelector((state) => state.member.users);
-  // const members = useSelector(state => state.groups);
+  // find the group that matches the currently rendered group
+  const groups = useSelector((state) => state.groups);
+  const users = useSelector((state) => state.users);
+  if (!groups) return null;
   if (!users) return "loading...";
-  // if (!members) return null;
 
-  // const members2 = members.map(member => member.users.username);
+  const groupInfo = groups.find((group) => group.id === props.groupId);
 
   const handleClickOpen = (id) => {
     dispatch(fetchGroup(id));
-    dispatch(fetchGroups());
     setOpen(true);
   };
 
@@ -120,11 +114,18 @@ export default function GroupMemberDialog(props) {
     setOpen(false);
   };
 
+  // const memberNames = useSelector(state => state.groups.map(group => group.users.map(user => user.username)));
+  // console.log("OUTPUT: GroupMemberDialog -> memberNames", memberNames)
+  // // if (!users) return "loading...";
+  // if (!memberNames) return null;
+
+  // const members2 = members.map(member => member.users.username);
+
   return (
     <div>
       <Typography variant="subtitle1">
         Members:
-        <RenderMembers groupId={props.groupId} />
+        <RenderMembers groupInfo={groupInfo} />
       </Typography>
       <br />
       <Button
@@ -144,3 +145,36 @@ export default function GroupMemberDialog(props) {
     </div>
   );
 }
+//   return (
+//     <div>
+//       {result.users === null ? (
+
+//         <Button
+//           variant="outlined"
+//           color="primary"
+//           onClick={() => handleClickOpen(props.groupId)}
+//           // onClick={() => handleClickOpen()}
+//         >
+//           <GroupAddRoundedIcon />
+//         </Button>
+
+//       ) : (
+//         <>
+//         <Typography variant="subtitle1">
+//           Members:
+//           <RenderMembers result={result} />
+//         </Typography>
+
+//       <SimpleDialog
+//         open={open}
+//         onClose={handleClose}
+//         users={users}
+//         // members={members2}
+//         groupId={props.groupId}
+//       />
+// </>
+//       )
+// }
+//       </div>
+
+// )

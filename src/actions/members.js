@@ -21,6 +21,7 @@ export const fetchUsers = () => async (dispatch, getState) => {
     .get(`${baseUrl}/users/${loggedUserId}`)
     .then(res => {
       dispatch(usersFetched(res.data));
+      // console.log("OUTPUT: fetchUsers -> res.data", res.data)
     })
     .catch(console.error);
 };
@@ -47,9 +48,9 @@ function membersFetched(members) {
   };
 }
 
-export const addMember = userId => {
+export const addMember = (userId, groupId) => {
   return async function(dispatch, getState) {
-    const groupId = getState().group.map(g => g.id);
+    // const groupId = getState().group.map(g => g.id);
 
     // add userId and groupId to groupUser table based on groupId chosen
     const response = await axios({
@@ -71,6 +72,6 @@ export const addMember = userId => {
     
     // when member is added, remove that member from friend list (users)
     dispatch(memberAdded(response.data));
-    dispatch(userRemoved(response.data.userId));
+    // dispatch(userRemoved(response.data.userId));
   };
 };
