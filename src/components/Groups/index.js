@@ -41,7 +41,7 @@ export default function GroupsContainer() {
     <div clasName={classes.root}>
       {groups.length !== 0 && (
         <>
-          <Grid container spacing={10}>
+          <Grid container spacing={12}>
             <Grid item xs={12} component="h2" variant="h6">
               your groups are:
             </Grid>
