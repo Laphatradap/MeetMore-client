@@ -65,13 +65,10 @@ export default function MultipleSelect(props) {
 
   const handleChange = (event) => {
     const { value } = event.target;
+    value
+      .map((v) => v.id)
+      .forEach((i) => dispatch(addMember(i, props.groupId)));
     setState(value);
-    dispatch(
-      addMember(
-        value.map((v) => v.id),
-        props.groupId
-      )
-    );
   };
 
   return (
@@ -100,7 +97,7 @@ export default function MultipleSelect(props) {
         >
           {names.map((name) => (
             <MenuItem
-              key={name.id}
+              key={"aa" + name.id}
               value={name}
               style={getStyles(name, state, theme)}
             >

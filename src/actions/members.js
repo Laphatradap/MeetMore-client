@@ -11,7 +11,7 @@ const baseUrl = "http://localhost:4000";
 function usersFetched(users) {
   return {
     type: USERS_FETCHED,
-    users
+    users,
   };
 }
 
@@ -19,7 +19,7 @@ export const fetchUsers = () => async (dispatch, getState) => {
   const loggedUserId = getState().user.id;
   await axios
     .get(`${baseUrl}/users/${loggedUserId}`)
-    .then(res => {
+    .then((res) => {
       dispatch(usersFetched(res.data));
       // console.log("OUTPUT: fetchUsers -> res.data", res.data)
     })
@@ -30,48 +30,46 @@ export const fetchUsers = () => async (dispatch, getState) => {
 function memberAdded(member) {
   return {
     type: MEMBER_ADDED,
-    member
+    member,
   };
 }
 
 function userRemoved(userId) {
   return {
     type: USER_REMOVED,
-    userId
+    userId,
   };
 }
 
 function membersFetched(members) {
   return {
     type: MEMBERS_FETCHED,
-    members
+    members,
   };
 }
 
 export const addMember = (userId, groupId) => {
-  return async function(dispatch, getState) {
-    // const groupId = getState().group.map(g => g.id);
-
+  return async function (dispatch) {
     // add userId and groupId to groupUser table based on groupId chosen
-    const response = await axios({
+    await axios({
       method: "POST",
       url: `${baseUrl}/groupUser/member`,
       data: {
         userId,
-        groupId
-      }
+        groupId,
+      },
     });
 
     // fetch all members from groupUser table based on groupId
     await axios
       .get(`${baseUrl}/groupUser/${groupId}`)
-      .then(res => {
-        dispatch(membersFetched(res.data));
+      .then((res) => {
+        // dispatch(membersFetched(res.data));
+        dispatch(memberAdded(res.data));
       })
       .catch(console.error);
-    
-    // when member is added, remove that member from friend list (users)
-    dispatch(memberAdded(response.data));
-    // dispatch(userRemoved(response.data.userId));
   };
+  // when member is added, remove that member from friend list (users)
+  // dispatch(memberAdded(res.data));
+  // dispatch(userRemoved(response.data.userId));
 };
