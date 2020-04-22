@@ -12,10 +12,6 @@ export default function MatchedAvilabilityGroup(props) {
 
   const result = matches.find((match) => match.groupId === groupId);
 
-  const members = result.memberNames
-    .filter((r) => r != userloggedin)
-    .map((el) => el.username);
-
   const datesFormatted = result.matchedRanges.map((date) => {
     var newObj = {};
     newObj["startDate"] = moment(date.rangeBegin).format(

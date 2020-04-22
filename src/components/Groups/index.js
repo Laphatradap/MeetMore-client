@@ -1,14 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-// import GroupMemberDialog from "../GroupMemberDialog";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import { fetchGroups } from "../../actions/group";
-// import { fetchUsers } from "../../actions/members";
-
 import AddMemberContainer from "../AddMember";
+import RenderMembersCard from "../AddMember/RenderMembersCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +29,14 @@ export default function GroupsContainer() {
   const groups = useSelector((state) => state.groups);
   if (!groups) return null;
 
+  const RenderMembers = (groups, CardComponent) => {
+    if (groups.hasOwnProperty("users")) {
+      return groups.users.map((user) => (
+        <CardComponent key={user.id} id={user.id} name={user.username} />
+      ));
+    }
+  };
+
   return (
     <div clasName={classes.root}>
       {groups.length !== 0 && (
@@ -46,11 +50,12 @@ export default function GroupsContainer() {
                 <Grid item xs={12} sm={6}>
                   <Paper component="h3" variant="h6" className={classes.paper}>
                     {group.groupName}
-                    <Typography align="center">
-                      <AddMemberContainer groupId={group.id} />
-                      <br></br>
-                      {/* <GroupMemberDialog groupId={group.id} /> */}
+                    <br></br>
+                    <Typography>
+                      Members: {RenderMembers(group, RenderMembersCard)}
                     </Typography>
+                    <br></br>
+                    <AddMemberContainer groupId={group.id} />
                   </Paper>
                 </Grid>
               ))}

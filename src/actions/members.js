@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const USERS_FETCHED = "USERS_FETCHED";
 export const MEMBER_ADDED = "MEMBER_ADDED";
-export const USER_REMOVED = "USER_REMOVED";
+// export const USER_REMOVED = "USER_REMOVED";
 export const MEMBERS_FETCHED = "MEMBERS_FETCHED";
 
 const baseUrl = "http://localhost:4000";
@@ -14,14 +14,12 @@ function usersFetched(users) {
     users,
   };
 }
-
 export const fetchUsers = () => async (dispatch, getState) => {
   const loggedUserId = getState().user.id;
   await axios
     .get(`${baseUrl}/users/${loggedUserId}`)
     .then((res) => {
       dispatch(usersFetched(res.data));
-      // console.log("OUTPUT: fetchUsers -> res.data", res.data)
     })
     .catch(console.error);
 };
@@ -34,19 +32,12 @@ function memberAdded(member) {
   };
 }
 
-function userRemoved(userId) {
-  return {
-    type: USER_REMOVED,
-    userId,
-  };
-}
-
-function membersFetched(members) {
-  return {
-    type: MEMBERS_FETCHED,
-    members,
-  };
-}
+// function userRemoved(userId) {
+//   return {
+//     type: USER_REMOVED,
+//     userId,
+//   };
+// }
 
 export const addMember = (userId, groupId) => {
   return async function (dispatch) {
@@ -64,7 +55,6 @@ export const addMember = (userId, groupId) => {
     await axios
       .get(`${baseUrl}/groupUser/${groupId}`)
       .then((res) => {
-        // dispatch(membersFetched(res.data));
         dispatch(memberAdded(res.data));
       })
       .catch(console.error);

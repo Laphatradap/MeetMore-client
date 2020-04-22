@@ -38,16 +38,6 @@ export default function MatchedAvilability() {
   const matches = useSelector((state) => state.matches);
   if (!matches) return null;
 
-  // const RenderAvailability = (availability) => {
-  //   return availability.map((a) => (
-  //     <div>
-  //       groupName={a.groupName}
-  //       members={a.userInfo}
-  //       matches={a.matches.map((match) => match.startDate)}
-  //     </div>
-  //   ));
-  // };
-
   return (
     <div className={classes.root}>
       {matches.length !== 0 && (
@@ -60,7 +50,7 @@ export default function MatchedAvilability() {
               {matches.map((m) => (
                 <Grid item xs={12} sm={6}>
                   <Paper component="h3" variant="h6" className={classes.paper}>
-                    Group name: {m.groupName}
+                    {m.groupName}
                     <Typography align="center">
                       <MatchedAvilabilityGroup groupId={m.groupId} />
                     </Typography>
@@ -74,72 +64,3 @@ export default function MatchedAvilability() {
     </div>
   );
 }
-
-// display
-// export default function MatchedAvilability() {
-//   const classes = useStyles();
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     dispatch(fetchMatchedAvailability());
-//   }, []);
-
-//   const groups = useSelector((state) => state.groups);
-//   if (!groups) return null;
-
-//   const RenderAvailability = (props) => {
-//     // Get info of each group
-//     const result = groups.find((group) => group.groupId === props.groupId);
-//     console.log("OUTPUT: RenderAvailability -> result", result)
-
-//     // Get availability of each user in the group
-//     const availability = result.users.map((user) => user.availabilities);
-
-//     // Concatenate into a single list
-//     const combinedAvailability = availability.reduce((acc, curr) => {
-//       return acc.concat(curr);
-//     }, []);
-
-//     // Format the array with only 3 key/value pairs and format dates with Moment.js
-//     var formattedAvailability = combinedAvailability.map((entity) => {
-//       var newObj = {};
-//       newObj["userId"] = entity.userId;
-//       newObj["date"] = entity.startDate.concat(entity.endDate);
-//       newObj["startDate"] = moment(entity.startDate).format(
-//         "dddd, MMMM D YYYY, h:mm a"
-//       );
-//       newObj["endDate"] = moment(entity.endDate).format(
-//         "dddd, MMMM D YYYY, h:mm a"
-//       );
-//       return newObj;
-//     });
-
-//     return (<div>Hi</div>)}
-
-//   return (
-//     <div className={classes.root}>
-//       {groups.length !== 0 && (
-//         <>
-//           <Grid container spacing={10}>
-//             <Grid item xs={12} component="h2" variant="h6">
-//               your matched dates are:
-//             </Grid>
-//             <>
-//               {groups.map((group) => (
-//                 <Grid item xs={12} sm={6}>
-//                   <Paper component="h3" variant="h6" className={classes.paper}>
-//                     {group.groupName}
-
-//                     <Typography>
-//                       <RenderAvailability groupId={group.id} />
-//                     </Typography>
-//                     <Typography align="center"></Typography>
-//                   </Paper>
-//                 </Grid>
-//               ))}
-//             </>
-//           </Grid>
-//         </>
-//       )}
-//     </div>
-//   );
-// }

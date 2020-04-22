@@ -74,6 +74,7 @@ export default function MultipleSelect(props) {
   return (
     <div>
       <FormControl className={classes.formControl}>
+        <br></br>
         <InputLabel id="demo-mutiple-chip-label">Select Members</InputLabel>
         <Select
           labelId="demo-mutiple-chip-label"

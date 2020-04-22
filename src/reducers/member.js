@@ -10,7 +10,7 @@ export default (state = null, action) => {
       return action.members;
 
     case MEMBER_ADDED:
-      return action.member
+      return [...state, action.member]
 
     // case USER_REMOVED:
     //   return {
