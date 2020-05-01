@@ -1,14 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepButton from "@material-ui/core/StepButton";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import {Stepper, Step, StepButton, Button, Typography, Grid} from "@material-ui/core";
+// import Step from "@material-ui/core/Step";
+// import StepButton from "@material-ui/core/StepButton";
+// import Button from "@material-ui/core/Button";
+// import Typography from "@material-ui/core/Typography";
 import Availability from "../Availability";
 import CreateGroup from "../CreateGroup";
-import Grid from "@material-ui/core/Grid";
-import MatchedAvailability from "../Availability/MatchedAvailability";
+// import Grid from "@material-ui/core/Grid";
+import MatchedAvailability from "../MatchedAvailability";
 
 const useStyles = makeStyles(theme => ({
   root: {

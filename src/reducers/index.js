@@ -5,9 +5,11 @@ import group from "./group";
 import groups from "./groups"
 import member from "./member";
 import matches from "./matches"
+import users from "./users"
 
 export default combineReducers({
   user,
+  users,
   availability,
   group,
   groups,

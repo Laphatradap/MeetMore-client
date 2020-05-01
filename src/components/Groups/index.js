@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import GroupMemberDialog from "../GroupMemberDialog";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import { fetchGroups } from "../../actions/group";
+import AddMemberContainer from "../AddMember";
+import RenderMembersCard from "../AddMember/RenderMembersCard";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     "& > span": {
-      margin: theme.spacing(2)
-    }
+      margin: theme.spacing(2),
+    },
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 export default function GroupsContainer() {
@@ -27,25 +26,36 @@ export default function GroupsContainer() {
     dispatch(fetchGroups());
   }, []);
 
-  const groups = useSelector(state => state.groups);
+  const groups = useSelector((state) => state.groups);
   if (!groups) return null;
+
+  const RenderMembers = (groups, CardComponent) => {
+    if (groups.hasOwnProperty("users")) {
+      return groups.users.map((user) => (
+        <CardComponent key={user.id} id={user.id} name={user.username} />
+      ));
+    }
+  };
 
   return (
     <div clasName={classes.root}>
       {groups.length !== 0 && (
         <>
-          <Grid container spacing={10}>
+          <Grid container spacing={12}>
             <Grid item xs={12} component="h2" variant="h6">
               your groups are:
             </Grid>
             <>
-              {groups.map(group => (
-                <Grid item xs={12} sm={6} >
+              {groups.map((group) => (
+                <Grid item xs={12} sm={6}>
                   <Paper component="h3" variant="h6" className={classes.paper}>
                     {group.groupName}
-                    <Typography align="center">
-                      <GroupMemberDialog groupId={group.id} />
+                    <br></br>
+                    <Typography>
+                      Members: {RenderMembers(group, RenderMembersCard)}
                     </Typography>
+                    <br></br>
+                    <AddMemberContainer groupId={group.id} />
                   </Paper>
                 </Grid>
               ))}

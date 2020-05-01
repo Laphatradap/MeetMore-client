@@ -1,9 +1,9 @@
-import { GROUP_FETCHED } from "../actions/group";
+import { USERS_FETCHED } from "../actions/members";
 
 export default (state = null, action) => {
   switch (action.type) {
-    case GROUP_FETCHED:
-      return action.payload;
+    case USERS_FETCHED:
+      return action.users;
 
     default:
       return state;

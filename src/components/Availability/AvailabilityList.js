@@ -6,20 +6,20 @@ import Typography from "@material-ui/core/Typography";
 import { fetchAvailability } from "../../actions/availability";
 import * as moment from "moment";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   item: {
     padding: theme.spacing(2),
     textAlign: "center",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   title: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 export default function AvailabilityList() {
@@ -30,13 +30,12 @@ export default function AvailabilityList() {
     dispatch(fetchAvailability());
   }, []);
 
-  const username = useSelector(state => state.user.username);
-  const entity = useSelector(state => state.availability);
+  const username = useSelector((state) => state.user.username);
+  const entity = useSelector((state) => state.availability);
   if (!entity) return null;
-  // console.log("OUTPUT: AvailabilityList -> entity", entity)
 
   // reformat dates for display using Moment.js
-  const datesFormatted = entity.map(date => {
+  const datesFormatted = entity.map((date) => {
     var newObj = {};
     newObj["startDate"] = moment(date.startDate).format(
       "dddd, MMMM D YYYY, h:mm a"
@@ -49,25 +48,29 @@ export default function AvailabilityList() {
 
   return (
     <div className={classes.root}>
-      <Grid container justify="center" direction="column" spacing={3}>
-        <Grid item className={classes.item}>
-          <Typography component="h1" variant="h5" className={classes.title}>
-            {username}, your availabilities are:
-          </Typography>
-          <Typography>
-            {datesFormatted.map(date => (
-              <ul>
-                <li>
-                  From {date.startDate}
-                  <br />
-                  To {date.endDate}
-                  <br></br>
-                </li>
-              </ul>
-            ))}
-          </Typography>
-        </Grid>
-      </Grid>
+      {entity.length !== 0 && (
+        <>
+          <Grid container justify="center" direction="column" spacing={3}>
+            <Grid item className={classes.item}>
+              <Typography component="h1" variant="h5" className={classes.title}>
+                {username}, your availabilities are:
+              </Typography>
+              <Typography>
+                {datesFormatted.map((date) => (
+                  <ul>
+                    <li>
+                      From {date.startDate}
+                      <br />
+                      To {date.endDate}
+                      <br></br>
+                    </li>
+                  </ul>
+                ))}
+              </Typography>
+            </Grid>
+          </Grid>
+        </>
+      )}
     </div>
   );
 }

@@ -10,19 +10,17 @@ const baseUrl = "http://localhost:4000";
 function groupCreated(group) {
   return {
     type: GROUP_CREATED,
-    payload: {
-      group: group
-    }
+    payload: { group },
   };
 }
-export const createGroup = name => {
-  return async function(dispatch, getState) {
+export const createGroup = (name) => {
+  return async function (dispatch, getState) {
     const response = await axios({
       method: "POST",
       url: `${baseUrl}/groups`,
       data: {
-        groupName: name
-      }
+        groupName: name,
+      },
     });
     dispatch(groupCreated(response.data));
 
@@ -34,8 +32,8 @@ export const createGroup = name => {
       url: `${baseUrl}/groupUser`,
       data: {
         groupId: groupId,
-        userId: userId
-      }
+        userId: userId,
+      },
     });
   };
 };
@@ -44,7 +42,7 @@ export const createGroup = name => {
 function groupsFetched(groups) {
   return {
     type: GROUPS_FETCHED,
-    payload: groups
+    payload: groups,
   };
 }
 
@@ -52,7 +50,7 @@ export const fetchGroups = () => async (dispatch, getState) => {
   const userId = getState().user.id;
   await axios
     .get(`${baseUrl}/groups/user/${userId}`)
-    .then(res => {
+    .then((res) => {
       dispatch(groupsFetched(res.data));
     })
     .catch(console.error);
@@ -62,14 +60,14 @@ export const fetchGroups = () => async (dispatch, getState) => {
 function groupFetched(group) {
   return {
     type: GROUP_FETCHED,
-    payload: group
+    payload: group,
   };
 }
 
-export const fetchGroup = id => async dispatch => {
+export const fetchGroup = (id) => async (dispatch) => {
   await axios
     .get(`${baseUrl}/groups/${id}`)
-    .then(res => {
+    .then((res) => {
       dispatch(groupFetched(res.data));
     })
     .catch(console.error);

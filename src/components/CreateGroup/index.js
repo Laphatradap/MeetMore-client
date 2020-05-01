@@ -1,68 +1,60 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import { Paper, Grid, Typography } from "@material-ui/core";
 import { createGroup } from "../../actions/group";
 import GroupForm from "./GroupForm";
 import GroupsContainer from "../Groups";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   title: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 export default function CreateGroupContainer() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [state, setState] = useState({
-    groupName: ""
+    groupName: "",
   });
 
-  const onChange = event => {
+  const onChange = (event) => {
     const { name, value } = event.target;
-    setState(previousValue => ({
+    setState((previousValue) => ({
       ...previousValue,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
     dispatch(createGroup(state.groupName));
     setState({
-      groupName: ""
+      groupName: "",
     });
   };
 
   return (
     <div className={classes.root}>
       <Grid container justify="center" direction="column" spacing={3}>
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.paper}>
+          <Typography component="h1" variant="h5" className={classes.title}>
+            Create a new group
+          </Typography>
+          <GroupForm onSubmit={onSubmit} onChange={onChange} values={state} />
+          <br></br>
           <Paper className={classes.paper}>
-            <Typography component="h1" variant="h5" className={classes.title}>
-              Create a new group
-            </Typography>
-            <GroupForm onSubmit={onSubmit} onChange={onChange} values={state} />
-          </Paper>
-        </Grid>
-        <Grid item xs={12} container>
-          <Paper className={classes.paper}>
-            <Typography>
-              {state.groupName}
-            </Typography>
             <GroupsContainer />
           </Paper>
         </Grid>
