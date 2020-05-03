@@ -11,8 +11,8 @@ This repository is a client-side of my full-stack application, demonstraing my u
 - To showcase disciplined git usage
 
 ## Technologies used
-- [React](https://github.com/Laphatradap/MeetMore-client/tree/master/src/components)
-- [Redux](https://github.com/Laphatradap/MeetMore-client/tree/master/src/actions)
+- [React](https://github.com/Laphatradap/MeetMore-client/blob/master/src/components/Groups/index.js)
+- [Redux](https://github.com/Laphatradap/MeetMore-client/blob/master/src/actions/availability.js)
 - [Sequelize](https://github.com/Laphatradap/MeetMore-server/blob/master/Availability/router.js)
 - [Express](https://github.com/Laphatradap/MeetMore-server/blob/master/server.js)
 - [Material-UI](https://github.com/Laphatradap/MeetMore-client/blob/master/src/components/Availability/DateTimePicker.js)
