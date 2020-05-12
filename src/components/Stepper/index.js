@@ -7,7 +7,6 @@ import {
   Button,
   Typography,
   Grid,
-  Paper
 } from "@material-ui/core";
 import Availability from "../Availability";
 import CreateGroup from "../CreateGroup";
@@ -22,10 +21,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginRight: theme.spacing(1),
   },
-  backButton: {
-    marginRight: theme.spacing(1),
-  },
-  completed: {
+  finished: {
     display: "inline-block",
   },
   instructions: {
@@ -39,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     bottom: 10,
     left: 0,
-    // top: "50%",
     width: "100%",
     justifyContent: "center",
   },
@@ -66,6 +61,8 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState(new Set());
+  const { root, button, finished, instructions, groupButton } = classes;
+
 
   const steps = getSteps();
 
@@ -122,7 +119,7 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
 
   return (
     <Grid item xs={12}>
-      <div className={classes.root}>
+      <div className={root}>
         <Stepper alternativeLabel nonLinear activeStep={activeStep}>
           {steps.map((label, index) => {
             const stepProps = {};
@@ -143,22 +140,22 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
         <div>
           {allStepsCompleted() ? (
             <div>
-              <Typography className={classes.instructions}>
+              <Typography className={instructions}>
                 All steps completed - you&apos;re finished
               </Typography>
               <Button onClick={handleReset}>Reset</Button>
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>
+              <Typography className={instructions}>
                 {getStepContent(activeStep)}
               </Typography>
-              <div className={classes.groupButton}>
+              <div className={groupButton}>
                 <Button
                   variant="contained"
                   disabled={activeStep === 0}
                   onClick={handleBack}
-                  className={classes.button}
+                  className={button}
                 >
                   Back
                 </Button>
@@ -166,13 +163,13 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
-                  className={classes.button}
+                  className={button}
                 >
                   Next
                 </Button>
                 {activeStep !== steps.length &&
                   (completed.has(activeStep) ? (
-                    <Typography variant="caption" className={classes.completed}>
+                    <Typography variant="caption" className={finished}>
                       Step {activeStep + 1} already completed
                     </Typography>
                   ) : (

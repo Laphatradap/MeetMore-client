@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { createGroup } from "../../actions/group";
 import GroupForm from "./GroupForm";
 import GroupsContainer from "../Groups";
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CreateGroupContainer() {
   const classes = useStyles();
+  const { root, paper, title } = classes;
   const dispatch = useDispatch();
   const [state, setState] = useState({
     groupName: "",
@@ -46,15 +47,15 @@ export default function CreateGroupContainer() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={root}>
       <Grid container justify="center" direction="column" spacing={3}>
-        <Grid item xs={12} className={classes.paper}>
-          <Typography component="h1" variant="h5" className={classes.title}>
+        <Grid item xs={12} className={paper}>
+          <Typography component="h1" variant="h5" className={title}>
             Create a new group
           </Typography>
           <GroupForm onSubmit={onSubmit} onChange={onChange} values={state} />
           <br></br>
-          <Grid item className={classes.paper}>
+          <Grid item className={paper}>
             <GroupsContainer />
           </Grid>
         </Grid>

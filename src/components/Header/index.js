@@ -2,27 +2,14 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   appBar: {
     top: 0,
     bottom: "auto",
     width: "100%",
     height: "56px",
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -37,24 +24,13 @@ export default function ButtonAppBar() {
   const handleMenu = () => {
     history.push("/");
   };
+  const { appBar, title } = classes;
 
   return (
     <div>
-      <AppBar position="fixed" color="primary" className={classes.appBar}>
-        <Toolbar className={classes.root}>
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="primary"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton> */}
-          <Typography
-            onClick={handleMenu}
-            variant="h6"
-            className={classes.title}
-          >
+      <AppBar position="fixed" color="primary" className={appBar}>
+        <Toolbar>
+          <Typography onClick={handleMenu} variant="h6" className={title}>
             Meet More
           </Typography>
           {!userLoggedIn && (
