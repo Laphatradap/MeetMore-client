@@ -9,11 +9,20 @@ import DateTimePicker from "./DateTimePicker";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    // marginTop: theme.spacing(5),
+    maxHeight: 700,
+    // width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    overflowX: "hidden",
+    overflowY: "scroll"
+    
   },
-  paper: {
+  container: {
     padding: theme.spacing(2),
     textAlign: "center",
     margin: "0 auto",
+    
   },
   title: {
     marginTop: theme.spacing(1),
@@ -22,8 +31,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
   },
   calendar: {
-    padding: theme.spacing(3)
-  }
+    padding: theme.spacing(3),
+  },
+  // container: {
+  //   marginTop: theme.spacing(5),
+  //   maxHeight: 600,
+  //   overflow: "scroll",
+  // },
 }));
 
 function Availability() {
@@ -34,31 +48,25 @@ function Availability() {
   //   }
   // };
   const classes = useStyles();
-  const isAvailabilityAdded = useSelector(
-    (state) => state.availability !== null
-  );
+
   return (
     <div className={classes.root}>
-      <Grid container justify="center" direction="column" spacing={3}>
-        <Grid item xs={4} className={classes.paper}>
-          {/* <Paper > */}
-          <Typography component="h1" variant="h5" className={classes.title}>
-            Which dates are you free to hang out?
-          </Typography>
-          {/* <br></br> */}
-          <Grid item className={classes.calendar}>
+      {/* <Paper className={classes.container}> */}
+        <Grid container justify="center" direction="column">
+          <Grid item xs={12} lg={4} className={classes.container}>
+            {/* <Paper > */}
+            <Typography component="h1" variant="h5" className={classes.title}>
+              Which dates are you free to hang out?
+            </Typography>
+            {/* <br></br> */}
+            <Grid item className={classes.calendar}>
+              <DateTimePicker />
+            </Grid>
 
-          <DateTimePicker />
-          </Grid>
-          {/* <br></br> */}
-          {isAvailabilityAdded ? (
             <AvailabilityList />
-          ) : (
-            <div>Add your availability</div>
-          )}
-          {/* </Paper> */}
+          </Grid>
         </Grid>
-      </Grid>
+      {/* </Paper> */}
     </div>
   );
 }

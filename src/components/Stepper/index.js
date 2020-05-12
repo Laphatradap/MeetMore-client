@@ -7,14 +7,10 @@ import {
   Button,
   Typography,
   Grid,
+  Paper
 } from "@material-ui/core";
-// import Step from "@material-ui/core/Step";
-// import StepButton from "@material-ui/core/StepButton";
-// import Button from "@material-ui/core/Button";
-// import Typography from "@material-ui/core/Typography";
 import Availability from "../Availability";
 import CreateGroup from "../CreateGroup";
-// import Grid from "@material-ui/core/Grid";
 import MatchedAvailability from "../MatchedAvailability";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,10 +33,14 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   groupButton: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(4),
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
+    position: "fixed",
+    bottom: 10,
+    left: 0,
+    // top: "50%",
+    width: "100%",
     justifyContent: "center",
   },
 }));
