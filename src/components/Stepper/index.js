@@ -1,6 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {Stepper, Step, StepButton, Button, Typography, Grid} from "@material-ui/core";
+import {
+  Stepper,
+  Step,
+  StepButton,
+  Button,
+  Typography,
+  Grid,
+} from "@material-ui/core";
 // import Step from "@material-ui/core/Step";
 // import StepButton from "@material-ui/core/StepButton";
 // import Button from "@material-ui/core/Button";
@@ -10,25 +17,32 @@ import CreateGroup from "../CreateGroup";
 // import Grid from "@material-ui/core/Grid";
 import MatchedAvailability from "../MatchedAvailability";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     flexGrow: 1,
-    marginTop: theme.spacing(8)
+    marginTop: theme.spacing(10),
   },
   button: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   backButton: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   completed: {
-    display: "inline-block"
+    display: "inline-block",
   },
   instructions: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  }
+    marginBottom: theme.spacing(1),
+  },
+  groupButton: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
 
 function getSteps() {
@@ -81,10 +95,10 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
   };
 
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStep = step => () => {
+  const handleStep = (step) => () => {
     setActiveStep(step);
   };
 
@@ -139,8 +153,9 @@ export default function HorizontalNonLinearAlternativeLabelStepper() {
               <Typography className={classes.instructions}>
                 {getStepContent(activeStep)}
               </Typography>
-              <div>
+              <div className={classes.groupButton}>
                 <Button
+                  variant="contained"
                   disabled={activeStep === 0}
                   onClick={handleBack}
                   className={classes.button}

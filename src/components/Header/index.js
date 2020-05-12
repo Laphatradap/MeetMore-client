@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -26,42 +26,51 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontWeight: 400,
   },
 }));
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const history = useHistory();
   const userLoggedIn = useSelector((state) => state.user.token !== null);
+  const handleMenu = () => {
+    history.push("/");
+  };
 
   return (
     <div>
       <AppBar position="fixed" color="primary" className={classes.appBar}>
         <Toolbar className={classes.root}>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="primary"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          </IconButton> */}
+          <Typography
+            onClick={handleMenu}
+            variant="h6"
+            className={classes.title}
+          >
             Meet More
           </Typography>
           {!userLoggedIn && (
             <>
-              <Link to="/signup">
-                <Button className={classes.root}>Sign up</Button>
-              </Link>
               <Link to="/login">
-                <Button className={classes.root}>Login</Button>
+                <Button>Login</Button>
+              </Link>
+              <Link to="/signup">
+                <Button>Sign up</Button>
               </Link>
             </>
           )}
           {userLoggedIn && (
             <>
               <Link to="/">
-                <Button className={classes.root}>Log out</Button>
+                <Button>Log out</Button>
               </Link>
             </>
           )}

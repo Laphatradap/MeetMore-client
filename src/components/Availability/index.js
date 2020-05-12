@@ -1,7 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import {Paper, Grid, Typography} from "@material-ui/core";
+import { Paper, Grid, Typography } from "@material-ui/core";
 import { addAvailability } from "../../actions/availability";
 import AvailabilityList from "./AvailabilityList";
 import DateTimePicker from "./DateTimePicker";
@@ -19,7 +19,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
     textAlign: "center",
+    fontWeight: "bold",
   },
+  calendar: {
+    padding: theme.spacing(3)
+  }
 }));
 
 function Availability() {
@@ -30,19 +34,29 @@ function Availability() {
   //   }
   // };
   const classes = useStyles();
+  const isAvailabilityAdded = useSelector(
+    (state) => state.availability !== null
+  );
   return (
     <div className={classes.root}>
       <Grid container justify="center" direction="column" spacing={3}>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Typography component="h1" variant="h5" className={classes.title}>
-              Which dates are you free to hang out?
-            </Typography>
-            <br></br>
-            <DateTimePicker />
-            <br></br>
+        <Grid item xs={4} className={classes.paper}>
+          {/* <Paper > */}
+          <Typography component="h1" variant="h5" className={classes.title}>
+            Which dates are you free to hang out?
+          </Typography>
+          {/* <br></br> */}
+          <Grid item className={classes.calendar}>
+
+          <DateTimePicker />
+          </Grid>
+          {/* <br></br> */}
+          {isAvailabilityAdded ? (
             <AvailabilityList />
-          </Paper>
+          ) : (
+            <div>Add your availability</div>
+          )}
+          {/* </Paper> */}
         </Grid>
       </Grid>
     </div>

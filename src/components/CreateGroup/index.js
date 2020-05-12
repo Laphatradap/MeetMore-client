@@ -54,9 +54,9 @@ export default function CreateGroupContainer() {
           </Typography>
           <GroupForm onSubmit={onSubmit} onChange={onChange} values={state} />
           <br></br>
-          <Paper className={classes.paper}>
+          <Grid item className={classes.paper}>
             <GroupsContainer />
-          </Paper>
+          </Grid>
         </Grid>
       </Grid>
     </div>
