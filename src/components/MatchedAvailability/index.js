@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MatchedAvilability() {
   const classes = useStyles();
+  const {root, paper, title} = classes
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMatchedAvailability());
@@ -39,20 +40,20 @@ export default function MatchedAvilability() {
   if (!matches) return null;
 
   return (
-    <div className={classes.root}>
+    <div className={root}>
       {matches.length !== 0 && (
         <>
-          <Grid container spacing={10} className={classes.title}>
+          <Grid container justify="center" spacing={10} className={title}>
             <Grid item xs={12} component="h2" variant="h6">
               {username}, your matches availabilities are:
             </Grid>
             <>
-              {matches.map((m) => (
-                <Grid item xs={12} sm={6}>
-                  <Paper component="h3" variant="h6" className={classes.paper}>
-                    {m.groupName}
+              {matches.map((match) => (
+                <Grid item xs={12} sm={6} lg={3}>
+                  <Paper component="h3" variant="h6" className={paper}>
+                    {match.groupName}
                     <Typography align="center">
-                      <MatchedAvilabilityGroup groupId={m.groupId} />
+                      <MatchedAvilabilityGroup groupId={match.groupId} />
                     </Typography>
                   </Paper>
                 </Grid>

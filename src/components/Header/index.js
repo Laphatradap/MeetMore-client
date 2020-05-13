@@ -1,53 +1,79 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  MenuItem,
+} from "@material-ui/core";
+import HomeIcon from "@material-ui/icons/Home";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   appBar: {
-    top: 0,
-    bottom: "auto",
-    width: "100%",
-    height: "56px",
+    zIndex: 1400,
+    // marginBottom: theme.spacing(3),
+  },
+  grow: {
+    flexGrow: 1,
   },
   title: {
-    flexGrow: 1,
-    fontWeight: 400,
+    display: "block",
+    // [theme.breakpoints.up("sm")]: {
+    //   display: "block",
+    // },
+  },
+  navLinkWhite: {
+    color: "white",
+    textDecoration: "none !important",
+    "&:hover, &:focus": {
+      color: "white",
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
   },
 }));
 
 export default function ButtonAppBar() {
   const classes = useStyles();
-  const history = useHistory();
   const userLoggedIn = useSelector((state) => state.user.token !== null);
-  const handleMenu = () => {
-    history.push("/");
-  };
-  const { appBar, title } = classes;
+  const { appBar, grow, title, navLinkWhite, menuButton } = classes;
 
   return (
     <div>
-      <AppBar position="fixed" color="primary" className={appBar}>
+      <AppBar position="static" className={appBar}>
         <Toolbar>
-          <Typography onClick={handleMenu} variant="h6" className={title}>
-            Meet More
-          </Typography>
+          <Link to="/" className={navLinkWhite}>
+            <IconButton edge="start" className={menuButton} color="inherit">
+              <HomeIcon color="inherit" />
+            </IconButton>
+          </Link>
+          <Typography variant="h6" className={title}>Meet More</Typography>
+          <div className={grow} />
           {!userLoggedIn && (
             <>
-              <Link to="/login">
-                <Button>Login</Button>
-              </Link>
-              <Link to="/signup">
-                <Button>Sign up</Button>
-              </Link>
+              <MenuItem>
+                <Link to="/login" className={navLinkWhite}>
+                  Log in
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/signup" className={navLinkWhite}>
+                 Sign up
+                </Link>
+              </MenuItem>
             </>
           )}
           {userLoggedIn && (
             <>
-              <Link to="/">
-                <Button>Log out</Button>
-              </Link>
+              <MenuItem>
+                <Link to="/" className={navLinkWhite}>
+                  &nbsp;&nbsp;Log out
+                </Link>
+              </MenuItem>
             </>
           )}
         </Toolbar>

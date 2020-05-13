@@ -10,10 +10,11 @@ import {
   Container
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// import Footer from "../Footer"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(10),
+    marginTop: theme.spacing(4),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -45,7 +46,7 @@ export default function SignUpLoginForm(props) {
             {text}
           </Typography>
           <form className={form} noValidate onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
               {!login && (
                 <>
                   <Grid item xs={12}>
@@ -112,18 +113,8 @@ export default function SignUpLoginForm(props) {
                 </>
               )}
             </Grid>
-            <Grid container justify="flex-end">
-              {login && (
-                <>
-                  <Grid item>
-                    <Link to="/signup" variant="body2">
-                      No account yet? Sign up
-                    </Link>
-                  </Grid>
-                </>
-              )}
-            </Grid>
           </form>
+        {/* <Footer /> */}
         </div>
       </Container>
     </>

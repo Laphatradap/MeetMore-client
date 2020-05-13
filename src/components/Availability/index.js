@@ -26,8 +26,15 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontWeight: "bold",
   },
+  subtitle: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    textAlign: "center",
+    // fontWeight: "semi-bold",
+    color: "grey",
+  },
   calendar: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
 }));
 
@@ -39,14 +46,17 @@ function Availability() {
   //   }
   // };
   const classes = useStyles();
-  const { root, container, title, calendar } = classes;
+  const { root, container, title, subtitle, calendar } = classes;
 
   return (
     <div className={root}>
       <Grid container justify="center" direction="column">
         <Grid item xs={12} lg={4} className={container}>
           <Typography component="h1" variant="h5" className={title}>
-            Which dates are you free to hang out?
+            Which dates are you free to meet?
+          </Typography>
+          <Typography component="h2" variant="h6" className={subtitle}>
+            Select one or more dates
           </Typography>
           <Grid item className={calendar}>
             <DateTimePicker />

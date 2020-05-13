@@ -17,14 +17,14 @@ const useStyles = makeStyles((theme) => ({
   background: {
     backgroundImage: `url(${HomeBanner})`,
     width: "100%",
-    height: "110vh",
+    height: "95vh",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    opacity: "0.6",
+    opacity: "0.2",
     position: "relative",
+    // marginTop: theme.spacing(),
   },
-
   title: {
     position: "absolute",
     left: 0,
@@ -53,7 +53,7 @@ export default function Banner() {
   const isLoggedIn = () => {
     if (!userLoggedIn) {
       setTimeout(() => {
-        history.push("/login");
+        history.push("/signup");
       }, 500);
     } else {
       history.push("/create");
@@ -67,7 +67,7 @@ export default function Banner() {
         width="1000"
         height="300"
       />
-      <Grid container justify="center" direction="column" alignItems="center">
+      <Grid container>
         <Grid item>
           <Typography className={classes.title}>
             Schedule Once, Meet More!

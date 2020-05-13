@@ -2,48 +2,64 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signUp } from "../../actions/users";
-import SignUpLoginForm from "../SignUpLogInForm"
+import SignUpLoginForm from "../SignUpLogInForm";
+import Alert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default function SignUp () {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    flexGrow: 1,
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+export default function SignUp() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
   const [state, setState] = useState({
     username: "",
     email: "",
-    password: ""
+    password: "",
   });
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    setState(previousValue => ({
+    setState((previousValue) => ({
       ...previousValue,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(signUp(state.username, state.email, state.password));
     setState({ username: "", email: "", password: "" });
   };
 
-  const isUserCreated = useSelector(state => state.user.userCreated);
+  const isUserCreated = useSelector((state) => state.user.userCreated);
 
   if (isUserCreated) {
     setTimeout(() => {
       history.push("/login");
-    }, 500);
-    return <p>Account created!</p>;
+    }, 700);
+    return (
+      <div className={classes.root}>
+        <Alert severity="success">Account created!</Alert>
+      </div>
+    );
   }
 
   return (
     <>
-    <SignUpLoginForm 
-      text={"Signup"}
-      handleSubmit={handleSubmit}
-      handleChange={handleChange}
-      values={state}
-    />
+      <SignUpLoginForm
+        text={"Sign up"}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        values={state}
+      />
     </>
   );
 }

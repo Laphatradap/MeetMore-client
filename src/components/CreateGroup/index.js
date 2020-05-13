@@ -9,8 +9,13 @@ import GroupsContainer from "../Groups";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    maxHeight: 700,
+    display: "flex",
+    flexDirection: "column",
+    overflowX: "hidden",
+    overflowY: "scroll",
   },
-  paper: {
+  container: {
     padding: theme.spacing(2),
     textAlign: "center",
     margin: "0 auto",
@@ -19,12 +24,23 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
     textAlign: "center",
+    fontWeight: "bold",
+  },
+  subtitle: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    textAlign: "center",
+    // fontWeight: "semi-bold",
+    color: "grey",
+  },
+  groupContainer: {
+    padding: theme.spacing(2),
   },
 }));
 
 export default function CreateGroupContainer() {
   const classes = useStyles();
-  const { root, paper, title } = classes;
+  const { root, container, title, subtitle, groupContainer } = classes;
   const dispatch = useDispatch();
   const [state, setState] = useState({
     groupName: "",
@@ -48,17 +64,20 @@ export default function CreateGroupContainer() {
 
   return (
     <div className={root}>
-      <Grid container justify="center" direction="column" spacing={3}>
-        <Grid item xs={12} className={paper}>
+      <Grid container justify="center" direction="column">
+        <Grid item xs={12} lg={4} className={container}>
           <Typography component="h1" variant="h5" className={title}>
-            Create a new group
+            Whom are you planning to meet?
+          </Typography>
+          <Typography component="h2" variant="h6" className={subtitle}>
+            Create a group and add people
           </Typography>
           <GroupForm onSubmit={onSubmit} onChange={onChange} values={state} />
           <br></br>
-          <Grid item className={paper}>
+        </Grid>
+          <Grid item className={groupContainer}>
             <GroupsContainer />
           </Grid>
-        </Grid>
       </Grid>
     </div>
   );

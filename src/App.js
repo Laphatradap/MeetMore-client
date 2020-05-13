@@ -5,8 +5,9 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Header from "./components/Header";
 import Stepper from "./components/Stepper";
-// import "./App.css"
+import "./App.css"
 import Home from "./components/Home";
+// import CssBaseline from '@material-ui/core/CssBaseline';
 
 class App extends React.Component {
   protectedRoutes = (Component, routerProps) => {
@@ -17,6 +18,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        {/* <CssBaseline /> */}
         <Router>
           <Header />
           <Route exact path="/" component={Home} />

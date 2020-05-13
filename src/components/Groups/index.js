@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GroupsContainer() {
   const classes = useStyles();
+  const {root, paper} = classes
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGroups());
@@ -38,17 +39,17 @@ export default function GroupsContainer() {
   };
 
   return (
-    <div clasName={classes.root}>
+    <div clasName={root}>
       {groups.length !== 0 && (
         <>
-          <Grid container spacing={12}>
+          <Grid container spacing={3}>
             <Grid item xs={12} component="h2" variant="h6">
               your groups are:
             </Grid>
             <>
               {groups.map((group) => (
-                <Grid item xs={12} sm={6}>
-                  <Paper component="h3" variant="h6" className={classes.paper}>
+                <Grid item xs={12} sm={6} lg={3}>
+                  <Paper component="h3" variant="h6" className={paper}>
                     {group.groupName}
                     <br></br>
                     <Typography>
