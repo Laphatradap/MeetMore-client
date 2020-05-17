@@ -1,9 +1,10 @@
 import axios from "axios";
+import { baseUrl } from "../api"
 
 export const USER_CREATED = "USER_CREATED";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
-const baseUrl = "http://localhost:4000";
+// const baseUrl = "http://localhost:4000";
 
 function signUpSuccess() {
   return { type: USER_CREATED };

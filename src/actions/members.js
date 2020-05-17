@@ -1,11 +1,12 @@
 import axios from "axios";
+import { baseUrl } from "../api"
 
 export const USERS_FETCHED = "USERS_FETCHED";
 export const MEMBER_ADDED = "MEMBER_ADDED";
 // export const USER_REMOVED = "USER_REMOVED";
 export const MEMBERS_FETCHED = "MEMBERS_FETCHED";
 
-const baseUrl = "http://localhost:4000";
+// const baseUrl = "http://localhost:4000";
 
 // // Fetch all users except the loggedUserId aka the group creator
 function usersFetched(users) {

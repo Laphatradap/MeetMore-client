@@ -1,10 +1,11 @@
 import axios from "axios";
+import { baseUrl } from "../api"
 
 export const GROUP_CREATED = "GROUP_CREATED";
 export const GROUPS_FETCHED = "GROUPS_FETCHED";
 export const GROUP_FETCHED = "GROUP_FETCHED";
 
-const baseUrl = "http://localhost:4000";
+// const baseUrl = "http://localhost:4000";
 
 // Create a group and pass groupId (from response) and UserId (from redux state)
 function groupCreated(group) {

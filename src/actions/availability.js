@@ -1,10 +1,10 @@
 import axios from "axios";
-
+import { baseUrl } from "../api"
 export const AVAILABILITY_ADDED = "AVAILABILITY_ADDED";
 export const AVAILABILITY_FETCHED = "AVAILABILITY_FETCHED";
 export const MATCHED_AVAILABILITY_FETCHED = "MATCHED_AVAILABILITY_FETCHED";
 
-const baseUrl = "http://localhost:4000";
+// const baseUrl = "http://localhost:4000";
 
 // Add availability with AUTH
 function availabilityAdded(entity) {
