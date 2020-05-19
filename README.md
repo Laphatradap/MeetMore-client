@@ -3,6 +3,12 @@
 ## What this project is about
 This repository is a client-side of my full-stack application, demonstraing my understanding of Javascript and React + Redux.
 
+## Table of contents:
+**[Goals for this project](#goals-for-this-project)**
+**[Technologies used](#technologies-used)**
+**[Features built so far](#features-built-so-far)**
+**[Git workflow](#git-workflow)**
+
 ## Goals for this project:
 - An attempt to solve my real-life issue of scheduling group meet-ups
 - To work on a bigger project
