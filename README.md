@@ -4,10 +4,10 @@
 This repository is a client-side of my full-stack application, demonstraing my understanding of Javascript and React + Redux.
 
 ## Table of contents:
-**[Goals for this project](#goals-for-this-project)**
-**[Technologies used](#technologies-used)**
-**[Features built so far](#features-built-so-far)**
-**[Git workflow](#git-workflow)**
+- **[Goals for this project](#goals-for-this-project)**
+- **[Technologies used](#technologies-used)**
+- **[Features](#features)**
+- **[Git workflow](#git-workflow)**
 
 ## Goals for this project:
 - An attempt to solve my real-life issue of scheduling group meet-ups
@@ -17,13 +17,13 @@ This repository is a client-side of my full-stack application, demonstraing my u
 - To showcase disciplined git usage
 
 ## Technologies used
-- [React](https://github.com/Laphatradap/MeetMore-client/blob/master/src/components/Groups/index.js)
+- [React ()Hooks)](./src/components/Groups)
 - [Redux](https://github.com/Laphatradap/MeetMore-client/blob/master/src/actions/availability.js)
 - [Sequelize](https://github.com/Laphatradap/MeetMore-server/blob/master/Availability/router.js)
 - [Express](https://github.com/Laphatradap/MeetMore-server/blob/master/server.js)
 - [Material-UI](https://github.com/Laphatradap/MeetMore-client/blob/master/src/components/Availability/DateTimePicker.js)
 
-## Features built so far
+## Features
 - [Feat/matchedAvailability](https://github.com/Laphatradap/MeetMore-server/blob/master/Availability/router.js)
 - [Feat/availability](https://github.com/Laphatradap/MeetMore-client/pull/2)
 - [Feat/groups](https://github.com/Laphatradap/MeetMore-client/pull/4)
