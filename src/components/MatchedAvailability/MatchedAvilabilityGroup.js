@@ -11,38 +11,40 @@ export default function MatchedAvilabilityGroup(props) {
   if (!userloggedin) return null;
 
   const result = matches.find((match) => match.groupId === groupId);
+  console.log("OUTPUT: MatchedAvilabilityGroup -> result", result);
 
-  const datesFormatted = result.matchedRanges.map((date) => {
+  const renderInfo = result.availabilityInfo.map((info) => {
     var newObj = {};
-    newObj["startDate"] = moment(date.rangeBegin).format(
+    newObj["startDate"] = moment(info.rangeBegin).format(
       "dddd, MMMM D YYYY, h:mm a"
     );
-    newObj["endDate"] = moment(date.rangeEnd).format(
+    newObj["endDate"] = moment(info.rangeEnd).format(
       "dddd, MMMM D YYYY, h:mm a"
     );
+    newObj["names"] = info.usernames.map((name) => <div>{name.username}</div>);
     return newObj;
   });
 
   return (
     <div>
-      {result.matchedRanges.length === 0 ? (
+      {result.availabilityInfo.length === 0 ? (
         <Typography>No matched availability</Typography>
       ) : (
         <>
           <Typography>
-            Available members:
-            {result.memberNames.map((el) => (
-                <div>{el.username}</div>
-            ))}
-            {datesFormatted.map((date) => (
-              <ul>
-                <li>
-                  From {date.startDate}
-                  <br />
-                  To {date.endDate}
-                  <br></br>
-                </li>
-              </ul>
+            {renderInfo.map((info) => (
+              <>
+                <ul>
+                  <li>
+                    From {info.startDate}
+                    <br />
+                    To {info.endDate}
+                    <br></br>
+                  </li>
+                </ul>
+                Available members:
+                {info.names}
+              </>
             ))}
           </Typography>
         </>
