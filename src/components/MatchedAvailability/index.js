@@ -45,7 +45,7 @@ export default function MatchedAvilability() {
         <>
           <Grid container justify="center" spacing={10} className={title}>
             <Grid item xs={12} component="h2" variant="h6">
-              {username}, your matches availabilities are:
+              {username}, your matched availabilities are:
             </Grid>
             <>
               {matches.map((match) => (

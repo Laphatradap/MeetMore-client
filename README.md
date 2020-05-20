@@ -1,6 +1,9 @@
 # Meet More 
 
-## :star: [Check out the deployed version here!](https://meetmore.netlify.app/) :star:
+## [Check out the deployed version here!](https://meetmore.netlify.app/)
+##### Test account details
+email address: harry@potter.com
+password: 123
 
 ## What this project is about
 This is client-side for a full-stack application that I built, demonstrating my understanding of Javascript, React + Redux and Material UI.
