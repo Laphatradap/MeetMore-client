@@ -28,7 +28,7 @@ export default function AvailabilityList() {
 
   useEffect(() => {
     dispatch(fetchAvailability());
-  }, []);
+  }, [dispatch]);
 
   const username = useSelector((state) => state.user.username);
   const entity = useSelector((state) => state.availability);

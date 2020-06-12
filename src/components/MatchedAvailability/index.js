@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MatchedAvilability() {
   const classes = useStyles();
-  const {root, paper, title} = classes
+  const { root, paper, title } = classes;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMatchedAvailability());
-  }, []);
+  }, [dispatch]);
 
   const username = useSelector((state) => state.user.username);
   const matches = useSelector((state) => state.matches);

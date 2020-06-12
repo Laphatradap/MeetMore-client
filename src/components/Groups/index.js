@@ -21,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GroupsContainer() {
   const classes = useStyles();
-  const {root, paper} = classes
+  const { root, paper } = classes;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGroups());
-  }, []);
+  }, [dispatch]);
 
   const groups = useSelector((state) => state.groups);
   if (!groups) return null;

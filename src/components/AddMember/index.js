@@ -56,7 +56,7 @@ export default function MultipleSelect(props) {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
 
   const [state, setState] = useState([]);
   const users = useSelector((state) => state.users);
