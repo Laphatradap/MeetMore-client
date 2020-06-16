@@ -11,7 +11,7 @@ export default function MatchedAvilabilityGroup(props) {
   if (!userloggedin) return null;
 
   const result = matches.find((match) => match.groupId === groupId);
-  console.log("OUTPUT: MatchedAvilabilityGroup -> result", result);
+  // console.log("OUTPUT: MatchedAvilabilityGroup -> result", result);
 
   const renderInfo = result.availabilityInfo.map((info) => {
     var newObj = {};
